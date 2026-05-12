@@ -1,0 +1,36 @@
+---
+title: aws-terraform
+slug: aws-terraform
+description: AWS infrastructure blueprint with VPC, ECS Fargate, RDS, and full CI/CD via Atlantis.
+category: infra
+stack: [Terraform, AWS, GitHub Actions, Atlantis]
+skills: [terraform-architect, security-auditor, ci-debugger]
+tags: [aws, terraform, ecs, fargate, rds, atlantis, iac]
+stars: 1340
+installs: 10500
+author: anthropic
+updated: 2026-04-25
+complexity: enterprise
+---
+
+## What's included
+
+A battle-tested AWS infrastructure blueprint covering networking, compute, data, and delivery. The VPC module provisions public and private subnets across three availability zones with NAT gateways and VPC flow logs enabled. ECS Fargate runs containerised workloads with auto-scaling policies and ALB target groups. RDS PostgreSQL runs in Multi-AZ with automated backups and a read replica for analytics.
+
+Atlantis manages Terraform plan and apply via pull request comments, enforcing the GitOps workflow. Every infrastructure change goes through code review before being applied. State is stored in S3 with DynamoDB locking. Drift detection runs nightly via a scheduled GitHub Actions workflow.
+
+## Architecture
+
+The repository is organised into reusable modules under `modules/` — `vpc`, `ecs-service`, `rds`, `alb`, `iam` — and environment directories under `environments/` that compose those modules. Variables flow down from the environment level; modules have no environment-specific logic.
+
+IAM follows least-privilege throughout. ECS task roles grant only the S3 prefixes and Secrets Manager paths each service needs. The `security-auditor` skill runs a Checkov scan in CI and blocks merges on HIGH and CRITICAL findings.
+
+## Getting started
+
+Run `npx specdriven add @specs/aws-terraform` to scaffold. Configure AWS credentials in your environment. Copy `environments/staging/terraform.tfvars.example` to `terraform.tfvars` and set your AWS account ID, region, and domain name. Run `terraform init` then `terraform plan` to review the proposed resources before applying.
+
+For the Atlantis GitOps flow, deploy Atlantis itself using the `atlantis` module in `modules/atlantis/`. Configure the GitHub webhook and repository allowlist in `atlantis.yaml`. From that point forward, all infrastructure changes are made via pull requests — no direct `terraform apply` from local machines.
+
+## Included skills
+
+The three bundled skills keep your infrastructure sharp over time. `terraform-architect` designs new modules and reviews resource configurations for cost and reliability. `security-auditor` performs OWASP-grounded checks on IAM policies, security group rules, and network ACLs. `ci-debugger` diagnoses failing Atlantis plans and GitHub Actions workflow errors, cutting MTTR on infrastructure CI failures.

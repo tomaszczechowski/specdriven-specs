@@ -1,0 +1,26 @@
+---
+title: node-cli
+slug: node-cli
+description: TypeScript CLI scaffold with argument parsing, interactive prompts, and auto-generated docs.
+category: cli
+stack: [Node.js, TypeScript, Commander.js, Ink]
+skills: [test-writer, docs-generator, changelog-writer]
+tags: [cli, typescript, commander, ink, node]
+stars: 540
+installs: 4100
+author: anthropic
+updated: 2026-03-05
+complexity: starter
+---
+
+## What's included
+
+A TypeScript CLI scaffold built on Commander.js for argument parsing and Ink for rich terminal UI. The spec includes a plugin system so users can extend the CLI with additional commands without modifying the core. TypeDoc generates API documentation automatically from JSDoc comments.
+
+Configuration is resolved from `~/.config/<tool>/config.json`, environment variables, and explicit flags — in that priority order. A built-in `config` command lets users view and set their configuration interactively.
+
+## Getting started
+
+Run `npx specdriven add @specs/node-cli` to scaffold. Install dependencies with `pnpm install`. Set the `name` and `bin` fields in `package.json` to match your tool name. Run `pnpm build` to compile TypeScript to `dist/` and `pnpm link` to make the CLI available globally in your shell.
+
+Run `pnpm test` to execute the Vitest suite. Tests cover command parsing, configuration resolution, and interactive prompt flows using Ink's test renderer. Run `pnpm docs` to generate HTML documentation from JSDoc annotations. The `changelog-writer` skill keeps `CHANGELOG.md` up to date as you cut releases.

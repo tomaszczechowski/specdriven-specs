@@ -1,0 +1,32 @@
+---
+title: expo-mobile
+slug: expo-mobile
+description: Cross-platform mobile app scaffold with Expo Router, auth flows, and offline support.
+category: mobile
+stack: [Expo, React Native, TypeScript, Zustand, TanStack Query]
+skills: [code-reviewer, test-writer]
+tags: [expo, react-native, mobile, offline, typescript]
+stars: 890
+installs: 7600
+author: community
+updated: 2026-02-28
+complexity: starter
+---
+
+## What's included
+
+A typed Expo SDK 51 scaffold targeting iOS and Android from a single codebase. Expo Router provides file-system-based navigation with deep linking pre-configured. Auth flows — sign-up, sign-in, email verification, and password reset — are wired to a configurable backend via an Axios client with token refresh interceptors.
+
+Zustand manages global client state. TanStack Query handles server state: data fetching, background revalidation, and optimistic updates. The spec includes an offline queue that replays mutations when connectivity is restored.
+
+## Architecture
+
+Screens live under `app/(auth)/` and `app/(tabs)/` following Expo Router conventions. Shared UI components are in `components/`, business logic in `lib/`, and API client code in `api/`. TypeScript paths are configured for clean absolute imports.
+
+The offline layer uses a persisted Zustand slice backed by `expo-secure-store` for tokens and `@react-native-async-storage/async-storage` for query cache persistence. Connectivity changes trigger a synchronisation pass that drains the mutation queue in order.
+
+## Getting started
+
+Run `npx specdriven add @specs/expo-mobile` to scaffold. Install dependencies with `npx expo install`. Copy `app.config.example.ts` to `app.config.ts` and set your API base URL and app identifiers. Start the development server with `npx expo start` and scan the QR code with Expo Go on your device.
+
+EAS Build is pre-configured for both preview and production channels. Run `eas build --profile preview` to produce a shareable build without needing Xcode or Android Studio locally.

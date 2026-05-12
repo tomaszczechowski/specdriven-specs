@@ -1,0 +1,12 @@
+{
+  "name": "specdriven-specs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Community-contributed project specs for specdriven.sh",
+  "scripts": {
+    "validate": "node .github/scripts/validate-specs.js"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}
