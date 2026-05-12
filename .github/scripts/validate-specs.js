@@ -159,13 +159,6 @@ function validateSpec(filePath) {
         }
     }
 
-    // stars/installs are filled in by the maintainer during review
-    if (frontmatter.stars !== undefined || frontmatter.installs !== undefined) {
-        warn(
-            `  ⚠️  Leave stars/installs blank — the maintainer fills these in during review`,
-        );
-    }
-
     const wordCount = bodyContent.split(/\s+/).filter((w) => w.length > 0).length;
 
     if (wordCount < 100) {

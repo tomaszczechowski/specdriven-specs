@@ -39,7 +39,7 @@ SPEC_REQUIREMENTS.md             Frontmatter spec and field rules
 
 1. CI validates frontmatter, content length, and that only `content/specs/*.mdx` files were touched.
 2. A maintainer reviews for usefulness, clarity, and uniqueness.
-3. On merge, the spec is synced to specdriven.sh; the maintainer fills in `stars` / `installs`.
+3. On merge, the spec is synced to specdriven.sh.
 
 ## License
 

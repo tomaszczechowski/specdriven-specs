@@ -14,7 +14,6 @@ Thanks for contributing! Please fill this out:
 - [ ] Filename matches slug (e.g., `my-spec.mdx` for slug `my-spec`)
 - [ ] Slug is kebab-case and unique
 - [ ] All required frontmatter fields present (`title`, `slug`, `description`, `category`, `stack`, `skills`, `tags`, `author`, `updated`, `complexity`)
-- [ ] `stars` and `installs` are left unset (the maintainer fills these in)
 - [ ] `title` is under 80 characters
 - [ ] `description` is under 150 characters (no markdown)
 - [ ] `category` is from the approved list (webapp, api, mobile, data, cli, infra)

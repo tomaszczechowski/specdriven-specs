@@ -45,15 +45,6 @@ complexity: string (enum)
 | `updated`     | string | ISO date format                                                                                  | `"2026-05-08"`                                     |
 | `complexity`  | string | One of: `starter`, `production`, `enterprise`                                                    | `"production"`                                     |
 
-### Maintainer-Managed Fields
-
-Do **not** set these — leave them out of your frontmatter entirely. The maintainer fills them in during review:
-
-- `stars` — community interest metric
-- `installs` — usage metric
-
-Submitting a PR with these fields set will trigger a warning in CI.
-
 ## Content Structure
 
 After frontmatter, write markdown content. Minimum 100 words total.
@@ -96,7 +87,6 @@ Before submitting, ensure:
 - ✅ `stack`, `skills`, and `tags` are non-empty arrays
 - ✅ `complexity` is from the allowed list
 - ✅ `updated` is in ISO date format (YYYY-MM-DD)
-- ✅ `stars` and `installs` are not set (maintainer fills these in)
 - ✅ Content is >100 words
 - ✅ No duplicate slug (check existing specs)
 - ✅ Only this `.mdx` file is in the PR (no other changes)
