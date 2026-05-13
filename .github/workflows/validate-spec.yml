@@ -8,7 +8,7 @@ permissions:
 on:
   pull_request:
     paths:
-      - "content/specs/*.mdx"
+      - "content/specs/**"
 
 jobs:
   Validate-spec:
@@ -33,20 +33,23 @@ jobs:
           BASE_SHA="${{ github.event.pull_request.base.sha }}"
           HEAD_SHA="${{ github.event.pull_request.head.sha }}"
           CHANGED_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
-          echo "Changed files: $CHANGED_FILES"
+          echo "Changed files:"
+          echo "$CHANGED_FILES" | sed 's/^/  /'
 
-          SPEC_FILES=$(printf '%s' "$CHANGED_FILES" | grep "^content/specs/[^/]*\.mdx$" || true)
-          {
-            echo "spec_files<<EOF"
-            echo "$SPEC_FILES"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+          SPEC_FILES=$(printf '%s\n' "$CHANGED_FILES" | grep -E "^content/specs/[^/]+/.+" || true)
+          SLUGS=$(printf '%s\n' "$SPEC_FILES" | awk -F'/' 'NF>=3 {print $3}' | sort -u)
 
           if [ -z "$CHANGED_FILES" ]; then
             OTHER_FILES=0
           else
-            OTHER_FILES=$(printf '%s' "$CHANGED_FILES" | grep -vc "^content/specs/[^/]*\.mdx$" || true)
+            OTHER_FILES=$(printf '%s\n' "$CHANGED_FILES" | grep -vcE "^content/specs/[^/]+/.+" || true)
           fi
+
+          {
+            echo "slugs<<EOF"
+            echo "$SLUGS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
           echo "other_files=$OTHER_FILES" >> "$GITHUB_OUTPUT"
 
       - name: Verify only spec files changed
@@ -55,51 +58,53 @@ jobs:
         run: |
           BASE_SHA="${{ github.event.pull_request.base.sha }}"
           HEAD_SHA="${{ github.event.pull_request.head.sha }}"
-          echo "❌ PR modified files outside content/specs/"
+          echo "❌ PR modified files outside content/specs/<slug>/"
           echo ""
-          echo "All files changed in this PR:"
-          git diff --name-only "$BASE_SHA" "$HEAD_SHA" | sed 's/^/  /'
-          echo ""
-          echo "Files outside content/specs/*.mdx (these are the problem):"
+          echo "Files outside the specs tree:"
           git diff --name-only "$BASE_SHA" "$HEAD_SHA" \
-            | grep -v "^content/specs/[^/]*\.mdx$" \
+            | grep -vE "^content/specs/[^/]+/.+" \
             | sed 's/^/  /' || true
-          echo ""
-          echo "Only .mdx files directly in content/specs/ should be modified."
           exit 1
 
-      - name: Validate spec files
+      - name: Validate spec directories
         id: validation
         env:
-          SPEC_FILES: ${{ steps.files.outputs.spec_files }}
+          SLUGS: ${{ steps.files.outputs.slugs }}
         run: |
-          readarray -t files <<< "$SPEC_FILES"
-          node .github/scripts/validate-specs.js "${files[@]}"
+          readarray -t slugs <<< "$SLUGS"
+          filtered=()
+          for s in "${slugs[@]}"; do
+            [ -n "$s" ] && filtered+=("$s")
+          done
+          if [ ${#filtered[@]} -eq 0 ]; then
+            echo "No spec directories changed."
+            exit 0
+          fi
+          node .github/scripts/validate-specs.js "${filtered[@]}"
 
       - name: Post validation summary
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
-            const changedFiles = `${{ steps.files.outputs.spec_files }}`
+            const slugs = `${{ steps.files.outputs.slugs }}`
               .split('\n')
-              .filter(f => f.trim().length > 0);
+              .map(s => s.trim())
+              .filter(s => s.length > 0);
 
             const scopePassed = '${{ steps.scope_check.outcome }}' !== 'failure';
             const validationPassed = '${{ steps.validation.outcome }}' === 'success';
 
             let summary = '## Validation Results\n\n';
 
-            if (changedFiles.length === 0) {
-              summary += '❌ No spec files found in this PR\n';
+            if (slugs.length === 0) {
+              summary += '❌ No spec directories found in this PR\n';
             } else {
-              summary += `Found ${changedFiles.length} spec file(s):\n\n`;
-              changedFiles.forEach(file => {
-                summary += `- \`${file}\`\n`;
-              });
+              summary += `Found ${slugs.length} spec director${slugs.length === 1 ? 'y' : 'ies'}:\n\n`;
+              slugs.forEach(s => { summary += `- \`content/specs/${s}/\`\n`; });
               summary += '\n### Checks\n\n';
-              summary += `- ${scopePassed ? '✅' : '❌'} Only spec files modified\n`;
-              summary += `- ${validationPassed ? '✅' : '❌'} Spec file validation passed\n`;
+              summary += `- ${scopePassed ? '✅' : '❌'} Only files under content/specs/ modified\n`;
+              summary += `- ${validationPassed ? '✅' : '❌'} Spec validation passed\n`;
             }
 
             const { data: comments } = await github.rest.issues.listComments({
@@ -108,8 +113,8 @@ jobs:
               issue_number: context.issue.number,
             });
 
-            const botComment = comments.find(comment =>
-              comment.user.type === 'Bot' && comment.body.includes('Validation Results')
+            const botComment = comments.find(c =>
+              c.user.type === 'Bot' && c.body.includes('Validation Results')
             );
 
             if (botComment) {

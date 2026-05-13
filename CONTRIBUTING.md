@@ -29,7 +29,8 @@ cd specdriven-specs
 Copy the template to create your spec file:
 
 ```bash
-cp templates/spec-example.mdx content/specs/my-spec.mdx
+cp -r templates/spec-example content/specs/my-spec
+mv content/specs/my-spec/spec-example.mdx content/specs/my-spec/my-spec.mdx
 ```
 
 Edit the file:
@@ -57,7 +58,7 @@ Work on a feature branch — do not push to `main` on your fork:
 
 ```bash
 git checkout -b add-my-spec
-git add content/specs/my-spec.mdx
+git add content/specs/my-spec
 git commit -m "Add spec: My Spec"
 git push origin add-my-spec
 ```

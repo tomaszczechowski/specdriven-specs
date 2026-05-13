@@ -7,23 +7,24 @@ Thanks for contributing! Please fill this out:
 - **Spec name:** (e.g., "Next.js SaaS")
 - **Category:** (webapp/api/mobile/data/cli/infra)
 - **Complexity:** (starter/production/enterprise)
-- **File:** `content/specs/[slug].mdx`
+- **Directory:** `content/specs/<slug>/`
 
 ### Submission Checklist
 
-- [ ] Filename matches slug (e.g., `my-spec.mdx` for slug `my-spec`)
-- [ ] Slug is kebab-case and unique
+- [ ] Directory is named `content/specs/<slug>/` (kebab-case, unique)
+- [ ] Entry file `<slug>.mdx` exists at the directory root
 - [ ] All required frontmatter fields present (`title`, `slug`, `description`, `category`, `stack`, `skills`, `tags`, `author`, `updated`, `complexity`)
-- [ ] `title` is under 80 characters
-- [ ] `description` is under 150 characters (no markdown)
-- [ ] `category` is from the approved list (webapp, api, mobile, data, cli, infra)
+- [ ] `title` under 80 characters
+- [ ] `description` under 150 characters (no markdown)
+- [ ] `category` from the approved list (webapp, api, mobile, data, cli, infra)
 - [ ] `complexity` is one of: starter, production, enterprise
 - [ ] `stack`, `skills`, and `tags` are non-empty arrays
-- [ ] `updated` is in ISO format (YYYY-MM-DD)
-- [ ] Content is >100 words
-- [ ] Sections include "What's included", "Architecture", and "Getting started"
-- [ ] No other files modified in this PR
-- [ ] No duplicate specs (checked existing specs)
+- [ ] `updated` in ISO format (YYYY-MM-DD)
+- [ ] Content body is >100 words
+- [ ] Supporting files (if any) use allowed extensions (`.mdx`, `.md`, `.sh`, `.json`, `.yaml`, `.yml`, `.toml`, `.txt`, `.js`, `.ts`, `.py`, `.xml`, `.xsd`, `.html`, `.pdf`, `.ttf`, `.tar`, `.gz`)
+- [ ] No single file > 5 MB, total spec < 30 MB, no more than 50 files
+- [ ] No symlinks
+- [ ] No files modified outside this spec's directory
 
 ### Description
 
