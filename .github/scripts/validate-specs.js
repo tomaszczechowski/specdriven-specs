@@ -11,7 +11,8 @@ const VALID_CATEGORIES = ["webapp", "api", "mobile", "data", "cli", "infra"];
 const VALID_COMPLEXITY = ["starter", "production", "enterprise"];
 
 const SPEC_REQUIRED_FRONTMATTER = ["name", "description"];
-const METADATA_REQUIRED = ["title", "category", "stack", "skills", "tags", "author", "updated", "complexity"];
+const METADATA_REQUIRED_LOCAL = ["title", "category", "stack", "skills", "tags", "author", "updated", "complexity"];
+const METADATA_REQUIRED_EXTERNAL = ["title", "description", "category", "stack", "skills", "tags", "author", "updated", "complexity", "source"];
 
 const ALLOWED_EXTENSIONS = new Set([
     ".mdx",
@@ -143,7 +144,7 @@ function validateSpecFile(slug, entryPath) {
     return valid;
 }
 
-function validateMetadataFile(slug, metaPath) {
+function validateMetadataFile(slug, metaPath, isExternal) {
     let metadata;
 
     try {
@@ -155,8 +156,9 @@ function validateMetadataFile(slug, metaPath) {
     }
 
     let valid = true;
+    const required = isExternal ? METADATA_REQUIRED_EXTERNAL : METADATA_REQUIRED_LOCAL;
 
-    for (const field of METADATA_REQUIRED) {
+    for (const field of required) {
         if (!(field in metadata)) {
             error(`  ❌ ${METADATA_FILENAME}: missing required field "${field}"`);
             valid = false;
@@ -164,6 +166,27 @@ function validateMetadataFile(slug, metaPath) {
     }
 
     if (!valid) return false;
+
+    if (metadata.source !== undefined) {
+        const s = metadata.source;
+        if (typeof s !== "object" || s === null || typeof s.url !== "string" || !/^https?:\/\//.test(s.url)) {
+            error(`  ❌ ${METADATA_FILENAME}: source.url must be a valid http(s) URL`);
+            valid = false;
+        }
+        if (s && s.homepage !== undefined && (typeof s.homepage !== "string" || !/^https?:\/\//.test(s.homepage))) {
+            error(`  ❌ ${METADATA_FILENAME}: source.homepage must be a valid http(s) URL`);
+            valid = false;
+        }
+        if (s && s.license !== undefined && typeof s.license !== "string") {
+            error(`  ❌ ${METADATA_FILENAME}: source.license must be a string`);
+            valid = false;
+        }
+    }
+
+    if (isExternal && (typeof metadata.description !== "string" || metadata.description.length === 0 || metadata.description.length > 150)) {
+        error(`  ❌ ${METADATA_FILENAME}: description must be a non-empty string (≤150 chars) for external entries`);
+        valid = false;
+    }
 
     const checks = [
         {
@@ -239,14 +262,22 @@ function validateSpecDirectory(specDir) {
     const entryPath = path.join(specDir, ENTRY_FILENAME);
     const metaPath = path.join(specDir, METADATA_FILENAME);
 
-    if (!fs.existsSync(entryPath)) {
-        error(`  ❌ Missing entry file: ${ENTRY_FILENAME}`);
+    if (!fs.existsSync(metaPath)) {
+        error(`  ❌ Missing metadata file: ${METADATA_FILENAME}`);
 
         return false;
     }
 
-    if (!fs.existsSync(metaPath)) {
-        error(`  ❌ Missing metadata file: ${METADATA_FILENAME}`);
+    let probeMetadata;
+    try {
+        probeMetadata = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+    } catch {
+        probeMetadata = {};
+    }
+    const isExternal = !!(probeMetadata && probeMetadata.source && typeof probeMetadata.source.url === "string");
+
+    if (!isExternal && !fs.existsSync(entryPath)) {
+        error(`  ❌ Missing entry file: ${ENTRY_FILENAME} (required for local entries; set metadata.source.url for external)`);
 
         return false;
     }
@@ -298,11 +329,13 @@ function validateSpecDirectory(specDir) {
         valid = false;
     }
 
-    if (!validateSpecFile(slug, entryPath)) valid = false;
-    if (!validateMetadataFile(slug, metaPath)) valid = false;
+    if (!isExternal && !validateSpecFile(slug, entryPath)) valid = false;
+    if (!validateMetadataFile(slug, metaPath, isExternal)) valid = false;
 
     if (valid) {
-        success(`  ✅ Valid (${fileCount} file${fileCount === 1 ? "" : "s"}, ${totalBytes} bytes)`);
+        const tag = isExternal ? " (external)" : "";
+
+        success(`  ✅ Valid${tag} (${fileCount} file${fileCount === 1 ? "" : "s"}, ${totalBytes} bytes)`);
     }
 
     return valid;
