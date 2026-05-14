@@ -16,7 +16,7 @@ cd specdriven-specs
 npm install
 
 cp -r templates/spec-example content/specs/my-spec
-mv content/specs/my-spec/spec-example.mdx content/specs/my-spec/my-spec.mdx
+# Edit SPEC.md (replace `name:`) and specdriven-metadata.json
 # edit my-spec.mdx
 npm run validate
 ```
@@ -30,8 +30,8 @@ Then open a pull request. CI runs the same validator and posts results as a comm
 ├── pull_request_template.md     PR checklist shown to contributors
 ├── scripts/validate-specs.js    Frontmatter + content validator
 └── workflows/validate-spec.yml  CI: runs validator, comments on PR
-content/specs/<slug>/            One directory per spec, with <slug>.mdx + optional supporting files
-templates/spec-example/          Starter template for new specs (directory)
+content/specs/<slug>/            One directory per spec: SPEC.md + specdriven-metadata.json + supporting files
+templates/spec-example/          Starter template for new specs
 CONTRIBUTING.md                  Submission workflow
 SPEC_REQUIREMENTS.md             Frontmatter spec and field rules
 ```

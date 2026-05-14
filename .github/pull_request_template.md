@@ -12,16 +12,16 @@ Thanks for contributing! Please fill this out:
 ### Submission Checklist
 
 - [ ] Directory is named `content/specs/<slug>/` (kebab-case, unique)
-- [ ] Entry file `<slug>.mdx` exists at the directory root
-- [ ] All required frontmatter fields present (`title`, `slug`, `description`, `category`, `stack`, `skills`, `tags`, `author`, `updated`, `complexity`)
-- [ ] `title` under 80 characters
+- [ ] `SPEC.md` exists with `name` and `description` frontmatter
+- [ ] `name` in `SPEC.md` matches the directory name
 - [ ] `description` under 150 characters (no markdown)
-- [ ] `category` from the approved list (webapp, api, mobile, data, cli, infra)
+- [ ] SPEC.md body is >100 words
+- [ ] `specdriven-metadata.json` exists with all required fields (`title`, `category`, `stack`, `skills`, `tags`, `author`, `updated`, `complexity`)
+- [ ] `category` is from the approved list (webapp/api/mobile/data/cli/infra)
 - [ ] `complexity` is one of: starter, production, enterprise
 - [ ] `stack`, `skills`, and `tags` are non-empty arrays
 - [ ] `updated` in ISO format (YYYY-MM-DD)
-- [ ] Content body is >100 words
-- [ ] Supporting files (if any) use allowed extensions (`.mdx`, `.md`, `.sh`, `.json`, `.yaml`, `.yml`, `.toml`, `.txt`, `.js`, `.ts`, `.py`, `.xml`, `.xsd`, `.html`, `.pdf`, `.ttf`, `.tar`, `.gz`)
+- [ ] Supporting files use allowed extensions (`.mdx`, `.md`, `.sh`, `.json`, `.yaml`, `.yml`, `.toml`, `.txt`, `.js`, `.ts`, `.py`, `.xml`, `.xsd`, `.html`, `.pdf`, `.ttf`, `.tar`, `.gz`)
 - [ ] No single file > 5 MB, total spec < 30 MB, no more than 50 files
 - [ ] No symlinks
 - [ ] No files modified outside this spec's directory

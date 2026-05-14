@@ -1,31 +1,7 @@
 ---
-# REQUIRED: Must match filename exactly (kebab-case)
-title: Spec Example
-slug: spec-example
-description: Production SaaS template with auth, billing, and multi-tenancy on Next.js 15 App Router.
-
-# REQUIRED: Pick one from: webapp, api, mobile, data, cli, infra
-category: webapp
-
-# REQUIRED: Free-form list of technologies that make up this spec
-stack: [Next.js, PostgreSQL, Tailwind, Stripe, Resend]
-
-# REQUIRED: Skill slugs from specdriven-skills that pair well with this spec
-skills: [code-reviewer, e2e-playwright, security-auditor]
-
-# REQUIRED: Custom tags for discovery (1-5 recommended, lowercase)
-tags: [saas, auth, billing, multi-tenancy, nextjs]
-
-# REQUIRED: Your name or "community"
-author: Tomasz Czechowski
-
-# REQUIRED: ISO date format (YYYY-MM-DD)
-updated: 2026-05-08
-
-# REQUIRED: Pick one from: starter, production, enterprise
-complexity: production
+name: spec-example
+description: "Production SaaS template with auth, billing, and multi-tenancy on Next.js 15 App Router."
 ---
-
 ## What's included
 
 This spec ships a complete SaaS foundation: authentication via NextAuth with email magic links and OAuth providers, Stripe Checkout and Customer Portal for subscription billing, and row-level security in PostgreSQL for multi-tenancy. Every layer is production-wired from day one — no throwaway scaffolding.

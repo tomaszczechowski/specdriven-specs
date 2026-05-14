@@ -1,16 +1,7 @@
 ---
-title: nextjs-saas
-slug: nextjs-saas
-description: Production SaaS template with auth, billing, and multi-tenancy on Next.js 15 App Router.
-category: webapp
-stack: [Next.js, PostgreSQL, Tailwind, Stripe, Resend]
-skills: [api-designer, code-reviewer, e2e-playwright, security-auditor]
-tags: [saas, auth, billing, multi-tenancy, nextjs]
-author: anthropic
-updated: 2026-04-12
-complexity: production
+name: nextjs-saas
+description: "Production SaaS template with auth, billing, and multi-tenancy on Next.js 15 App Router."
 ---
-
 ## What's included
 
 This spec ships a complete SaaS foundation: authentication via NextAuth with email magic links and OAuth providers, Stripe Checkout and Customer Portal for subscription billing, and row-level security in PostgreSQL for multi-tenancy. Every layer is production-wired from day one — no throwaway scaffolding.

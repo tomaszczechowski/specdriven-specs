@@ -1,0 +1,27 @@
+{
+  "title": "python-etl",
+  "category": "data",
+  "stack": [
+    "Python",
+    "Airflow",
+    "dbt",
+    "PostgreSQL",
+    "S3"
+  ],
+  "skills": [
+    "docs-generator",
+    "test-writer",
+    "ci-debugger"
+  ],
+  "tags": [
+    "etl",
+    "airflow",
+    "dbt",
+    "s3",
+    "pipeline",
+    "python"
+  ],
+  "author": "community",
+  "updated": "2026-01-15",
+  "complexity": "production"
+}

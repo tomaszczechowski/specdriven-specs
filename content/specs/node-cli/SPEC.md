@@ -1,16 +1,7 @@
 ---
-title: node-cli
-slug: node-cli
-description: TypeScript CLI scaffold with argument parsing, interactive prompts, and auto-generated docs.
-category: cli
-stack: [Node.js, TypeScript, Commander.js, Ink]
-skills: [test-writer, docs-generator, changelog-writer]
-tags: [cli, typescript, commander, ink, node]
-author: anthropic
-updated: 2026-03-05
-complexity: starter
+name: node-cli
+description: "TypeScript CLI scaffold with argument parsing, interactive prompts, and auto-generated docs."
 ---
-
 ## What's included
 
 A TypeScript CLI scaffold built on Commander.js for argument parsing and Ink for rich terminal UI. The spec includes a plugin system so users can extend the CLI with additional commands without modifying the core. TypeDoc generates API documentation automatically from JSDoc comments.

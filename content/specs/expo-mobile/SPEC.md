@@ -1,16 +1,7 @@
 ---
-title: expo-mobile
-slug: expo-mobile
-description: Cross-platform mobile app scaffold with Expo Router, auth flows, and offline support.
-category: mobile
-stack: [Expo, React Native, TypeScript, Zustand, TanStack Query]
-skills: [code-reviewer, test-writer]
-tags: [expo, react-native, mobile, offline, typescript]
-author: community
-updated: 2026-02-28
-complexity: starter
+name: expo-mobile
+description: "Cross-platform mobile app scaffold with Expo Router, auth flows, and offline support."
 ---
-
 ## What's included
 
 A typed Expo SDK 51 scaffold targeting iOS and Android from a single codebase. Expo Router provides file-system-based navigation with deep linking pre-configured. Auth flows — sign-up, sign-in, email verification, and password reset — are wired to a configurable backend via an Axios client with token refresh interceptors.

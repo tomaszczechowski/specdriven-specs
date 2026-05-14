@@ -30,7 +30,8 @@ Copy the template to create your spec file:
 
 ```bash
 cp -r templates/spec-example content/specs/my-spec
-mv content/specs/my-spec/spec-example.mdx content/specs/my-spec/my-spec.mdx
+# Open content/specs/my-spec/SPEC.md and replace `name: spec-example` with `name: my-spec`
+# Also edit specdriven-metadata.json with your title, category, stack, skills, tags, author, updated, complexity
 ```
 
 Edit the file:

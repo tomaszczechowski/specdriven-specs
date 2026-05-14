@@ -1,0 +1,26 @@
+{
+  "title": "Spec Example",
+  "category": "webapp",
+  "stack": [
+    "Next.js",
+    "PostgreSQL",
+    "Tailwind",
+    "Stripe",
+    "Resend"
+  ],
+  "skills": [
+    "code-reviewer",
+    "e2e-playwright",
+    "security-auditor"
+  ],
+  "tags": [
+    "saas",
+    "auth",
+    "billing",
+    "multi-tenancy",
+    "nextjs"
+  ],
+  "author": "Tomasz Czechowski",
+  "updated": "2026-05-08",
+  "complexity": "production"
+}
