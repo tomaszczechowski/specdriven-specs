@@ -329,7 +329,8 @@ function validateSpecDirectory(specDir) {
         valid = false;
     }
 
-    if (!isExternal && !validateSpecFile(slug, entryPath)) valid = false;
+    // Local entries require SPEC.md; external entries optionally include it as curated commentary.
+    if (fs.existsSync(entryPath) && !validateSpecFile(slug, entryPath)) valid = false;
     if (!validateMetadataFile(slug, metaPath, isExternal)) valid = false;
 
     if (valid) {
