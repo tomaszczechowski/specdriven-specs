@@ -6,7 +6,7 @@ description: "TypeScript CLI scaffold with argument parsing, interactive prompts
 
 A TypeScript CLI scaffold built on Commander.js for argument parsing and Ink for rich terminal UI. The spec includes a plugin system so users can extend the CLI with additional commands without modifying the core. TypeDoc generates API documentation automatically from JSDoc comments.
 
-Configuration is resolved from `~/.config/<tool>/config.json`, environment variables, and explicit flags — in that priority order. A built-in `config` command lets users view and set their configuration interactively.
+Configuration is resolved from `~/.config/<tool>/config.json`, environment variables, and explicit flags - in that priority order. A built-in `config` command lets users view and set their configuration interactively.
 
 ## Getting started
 

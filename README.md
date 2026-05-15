@@ -1,8 +1,17 @@
 # specdriven-specs
 
-Community-contributed project specs for [specdriven.sh](https://specdriven.sh), part of the **Spec Driven Development (SDD)** ecosystem — a methodology for using AI-generated specifications to accelerate software development.
+Community-contributed project specs for [specdriven.sh](https://specdriven.sh), part of the **Spec Driven Development (SDD)** ecosystem - a methodology for using AI-generated specifications to accelerate software development.
 
-A **spec** is a complete project blueprint — a tech stack, architecture, and set of skills bundled into a starting point you can scaffold from. Browse the live library at [specdriven.sh/specs](https://specdriven.sh/specs).
+A **spec** is a complete project blueprint - a tech stack, architecture, and set of skills bundled into a starting point you can scaffold from. Browse the live library at [specdriven.sh/specs](https://specdriven.sh/specs).
+
+## Hosting Modes - Internal vs External
+
+A spec can be hosted in this catalog two ways:
+
+- **Internal** - the full `SPEC.md` and supporting files live in this repo under `content/specs/<slug>/`. Maintainers review the body during PR. Best for community-curated specs.
+- **External** - only `specdriven-metadata.json` lives here, with a `source` field pointing to your upstream GitHub repo. The CLI fetches files from upstream at install time. Best when you maintain a larger stack in your own repo and want it discoverable without duplicating content.
+
+The `npx specdriven add spec <slug>` command works identically for both. See the [canonical docs](https://specdriven.sh/docs#internal-vs-external) for the full explanation.
 
 ## Contributing
 
@@ -44,4 +53,4 @@ SPEC_REQUIREMENTS.md             Frontmatter spec and field rules
 
 ## License
 
-[MIT](./LICENSE) — Copyright (c) 2026 Tomasz Czechowski.
+[MIT](./LICENSE) - Copyright (c) 2026 Tomasz Czechowski.

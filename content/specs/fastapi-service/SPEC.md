@@ -12,7 +12,7 @@ Authentication uses JWT bearer tokens with refresh token rotation. Rate limiting
 
 The project follows a clean layered structure: `api/routers/` for route handlers, `api/services/` for business logic, `api/repositories/` for database access, and `api/schemas/` for Pydantic models. Dependency injection wires services and repositories through FastAPI's `Depends` system, keeping handlers thin and testable.
 
-Background tasks — email delivery, webhook dispatch, report generation — run in Celery workers that share the same SQLAlchemy session factory as the main app. Flower provides a real-time task monitoring UI accessible during development.
+Background tasks - email delivery, webhook dispatch, report generation - run in Celery workers that share the same SQLAlchemy session factory as the main app. Flower provides a real-time task monitoring UI accessible during development.
 
 ## Getting started
 

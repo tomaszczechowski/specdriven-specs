@@ -8,17 +8,17 @@ Each spec lives in its own directory under `content/specs/`:
 
 ```
 content/specs/<slug>/
-├── SPEC.md                     REQUIRED — entry with name, description, body
-├── specdriven-metadata.json    REQUIRED — catalog metadata
-├── scripts/                    OPTIONAL — setup or scaffolding scripts
+├── SPEC.md                     REQUIRED - entry with name, description, body
+├── specdriven-metadata.json    REQUIRED - catalog metadata
+├── scripts/                    OPTIONAL - setup or scaffolding scripts
 │   └── bootstrap.sh
-└── examples/                   OPTIONAL — example files (env, configs, snippets)
+└── examples/                   OPTIONAL - example files (env, configs, snippets)
     └── env.example
 ```
 
 - **Directory name** equals the slug (kebab-case)
 - **`SPEC.md`** is the canonical entry file
-- **`specdriven-metadata.json`** is a sidecar with catalog-only fields. The CLI **does not** install this file — it stays in the source repo for the marketplace.
+- **`specdriven-metadata.json`** is a sidecar with catalog-only fields. The CLI **does not** install this file - it stays in the source repo for the marketplace.
 
 ### Allowed File Types
 

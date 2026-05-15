@@ -4,7 +4,7 @@ description: "Cross-platform mobile app scaffold with Expo Router, auth flows, a
 ---
 ## What's included
 
-A typed Expo SDK 51 scaffold targeting iOS and Android from a single codebase. Expo Router provides file-system-based navigation with deep linking pre-configured. Auth flows — sign-up, sign-in, email verification, and password reset — are wired to a configurable backend via an Axios client with token refresh interceptors.
+A typed Expo SDK 51 scaffold targeting iOS and Android from a single codebase. Expo Router provides file-system-based navigation with deep linking pre-configured. Auth flows - sign-up, sign-in, email verification, and password reset - are wired to a configurable backend via an Axios client with token refresh interceptors.
 
 Zustand manages global client state. TanStack Query handles server state: data fetching, background revalidation, and optimistic updates. The spec includes an offline queue that replays mutations when connectivity is restored.
 

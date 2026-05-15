@@ -1,6 +1,6 @@
 ---
 name: nextjs-saas
-description: Production SaaS template — Next.js 15 App Router, NextAuth, Stripe billing, Postgres multi-tenancy.
+description: Production SaaS template - Next.js 15 App Router, NextAuth, Stripe billing, Postgres multi-tenancy.
 ---
 
 ## What's included
@@ -9,13 +9,13 @@ A complete, opinionated SaaS foundation that ships production-wired from day one
 
 The frontend is Next.js 15 App Router with React Server Components throughout. Tailwind v4 for styling. **Drizzle ORM** with migrations checked into git. Vercel for hosting, Vercel Cron for scheduled jobs. Sentry for error tracking and **Vercel Analytics** for product analytics.
 
-This is the project blueprint for "I need to ship a SaaS in two weeks." It is not a hello-world template, and it is not aiming for maximum framework neutrality — it picks the stack that gets you to revenue fastest.
+This is the project blueprint for "I need to ship a SaaS in two weeks." It is not a hello-world template, and it is not aiming for maximum framework neutrality - it picks the stack that gets you to revenue fastest.
 
 ## Architecture
 
 **Three layers, strict boundaries.** The App Router (`app/`) owns routing and rendering. A thin service layer (`lib/`) owns business logic, called from server components and route handlers but never the other way around. The data layer (`db/`) contains Drizzle schemas, migrations, and query builders.
 
-**Multi-tenancy via Postgres RLS.** Every user-facing table has a `tenant_id` column with a row-level security policy that filters on `current_setting('app.tenant_id')`. The session middleware sets this Postgres session variable from the authenticated user's tenant. Application code never filters by tenant manually — if you forget the filter, RLS still blocks the query. This is the difference between "we have multi-tenancy" and "we have multi-tenancy that won't leak in three months when someone adds a new query."
+**Multi-tenancy via Postgres RLS.** Every user-facing table has a `tenant_id` column with a row-level security policy that filters on `current_setting('app.tenant_id')`. The session middleware sets this Postgres session variable from the authenticated user's tenant. Application code never filters by tenant manually - if you forget the filter, RLS still blocks the query. This is the difference between "we have multi-tenancy" and "we have multi-tenancy that won't leak in three months when someone adds a new query."
 
 **Stripe webhooks first, polling never.** Subscription state is the source of truth in Stripe. Locally we mirror the relevant fields (`status`, `current_period_end`, `price_id`) into a `subscriptions` table, updated only by signed webhook events. Reads go against the local mirror; writes go through Stripe API + webhook reconciliation. No polling, no drift.
 
@@ -27,7 +27,7 @@ This is the project blueprint for "I need to ship a SaaS in two weeks." It is no
 
 ```
 app/
-├── (marketing)/         Public pages — landing, pricing, docs
+├── (marketing)/         Public pages - landing, pricing, docs
 ├── (auth)/              Sign-in, sign-up, magic-link callbacks
 ├── (app)/               Authenticated app shell
 │   ├── settings/
@@ -88,18 +88,18 @@ For Stripe local development, run `stripe listen --forward-to localhost:3000/api
 
 Each skill below is opinionated about the workflow it covers and assumes the architecture above:
 
-- `code-reviewer` — review prompts tuned for Next.js + Drizzle patterns
-- `api-designer` — REST and route handler conventions for the App Router
-- `e2e-playwright` — auth flow + checkout flow tests with seeded Stripe fixtures
-- `security-auditor` — RLS policy verification, webhook signature checks, secrets hygiene
+- `code-reviewer` - review prompts tuned for Next.js + Drizzle patterns
+- `api-designer` - REST and route handler conventions for the App Router
+- `e2e-playwright` - auth flow + checkout flow tests with seeded Stripe fixtures
+- `security-auditor` - RLS policy verification, webhook signature checks, secrets hygiene
 
 Install any of them individually with `npx specdriven add skill <slug>`, or accept them all when you install this spec.
 
 ## When this spec is the wrong fit
 
-- **Bootstrap a marketing site, not a product.** Use a static template — no auth, no billing, no DB.
+- **Bootstrap a marketing site, not a product.** Use a static template - no auth, no billing, no DB.
 - **B2C consumer apps with social login as the primary identity.** This spec leans toward B2B (organization tenants, role-based access).
-- **Native mobile.** Use `expo-mobile` instead — different scaffold for different concerns.
+- **Native mobile.** Use `expo-mobile` instead - different scaffold for different concerns.
 - **Heavy compute or background workloads.** This spec keeps cron simple. For real worker fleets, lift the data layer into a separate service with a queue (BullMQ + Redis, or Inngest).
 
-If you find yourself fighting any of the choices above, the spec is the wrong tool — copy the parts you want and skip the rest.
+If you find yourself fighting any of the choices above, the spec is the wrong tool - copy the parts you want and skip the rest.

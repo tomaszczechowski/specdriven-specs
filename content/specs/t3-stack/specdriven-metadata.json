@@ -1,6 +1,6 @@
 {
   "title": "T3 Stack",
-  "description": "Type-safe full-stack starter — Next.js, tRPC, Prisma, NextAuth, Tailwind. Curated, hosted upstream.",
+  "description": "Type-safe full-stack starter - Next.js, tRPC, Prisma, NextAuth, Tailwind. Curated, hosted upstream.",
   "category": "webapp",
   "stack": ["Next.js", "TypeScript", "tRPC", "Prisma", "NextAuth", "Tailwind"],
   "skills": ["code-reviewer", "e2e-playwright"],

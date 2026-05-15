@@ -4,7 +4,7 @@ description: "Production SaaS template with auth, billing, and multi-tenancy on 
 ---
 ## What's included
 
-This spec ships a complete SaaS foundation: authentication via NextAuth with email magic links and OAuth providers, Stripe Checkout and Customer Portal for subscription billing, and row-level security in PostgreSQL for multi-tenancy. Every layer is production-wired from day one — no throwaway scaffolding.
+This spec ships a complete SaaS foundation: authentication via NextAuth with email magic links and OAuth providers, Stripe Checkout and Customer Portal for subscription billing, and row-level security in PostgreSQL for multi-tenancy. Every layer is production-wired from day one - no throwaway scaffolding.
 
 The frontend is built on Next.js 15 App Router with React Server Components throughout. Tailwind handles styling. Resend powers transactional email for welcome flows, password resets, and billing receipts. The spec also includes a fully typed admin dashboard for user and subscription management.
 
@@ -12,7 +12,7 @@ The frontend is built on Next.js 15 App Router with React Server Components thro
 
 The app follows a layered architecture: the App Router handles routing and server rendering, a thin service layer in `lib/` owns business logic, and `db/` contains Drizzle ORM schemas and migration files. Stripe webhooks land in a dedicated route handler with signature verification. All background jobs run via Vercel Cron.
 
-Multi-tenancy is implemented at the database level using a `tenant_id` column on every user-facing table, enforced by Postgres row-level security policies. Application code never filters by tenant manually — the RLS policies do it automatically after the session context is set.
+Multi-tenancy is implemented at the database level using a `tenant_id` column on every user-facing table, enforced by Postgres row-level security policies. Application code never filters by tenant manually - the RLS policies do it automatically after the session context is set.
 
 ## Getting started
 
