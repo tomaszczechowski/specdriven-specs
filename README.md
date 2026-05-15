@@ -1,6 +1,6 @@
 # specdriven-specs
 
-Community-contributed project specs for [specdriven.sh](https://specdriven.sh).
+Community-contributed project specs for [specdriven.sh](https://specdriven.sh), part of the **Spec Driven Development (SDD)** ecosystem — a methodology for using AI-generated specifications to accelerate software development.
 
 A **spec** is a complete project blueprint — a tech stack, architecture, and set of skills bundled into a starting point you can scaffold from. Browse the live library at [specdriven.sh/specs](https://specdriven.sh/specs).
 
