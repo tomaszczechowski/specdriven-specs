@@ -1,5 +1,13 @@
 # specdriven-specs
 
+<p align="center">
+  <a href="https://github.com/tomaszczechowski/specdriven-specs/tree/main/content/specs"><img src="https://img.shields.io/github/directory-file-count/tomaszczechowski/specdriven-specs/content%2Fspecs?type=dir&label=specs%20in%20catalog&style=flat-square&color=22d3ee&labelColor=0a0a0a" alt="Specs in catalog"/></a>
+  <a href="https://github.com/tomaszczechowski/specdriven-specs/commits/main"><img src="https://img.shields.io/github/last-commit/tomaszczechowski/specdriven-specs?style=flat-square&labelColor=0a0a0a" alt="Last update"/></a>
+  <a href="https://github.com/tomaszczechowski/specdriven-specs/pulls"><img src="https://img.shields.io/github/issues-pr/tomaszczechowski/specdriven-specs?style=flat-square&labelColor=0a0a0a&color=22d3ee" alt="Open PRs"/></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/tomaszczechowski/specdriven-specs?style=flat-square&labelColor=0a0a0a" alt="License"/></a>
+  <a href="https://specdriven.sh/specs"><img src="https://img.shields.io/badge/%F0%9F%93%8B_Live_Catalog-specdriven.sh%2Fspecs-22d3ee?style=flat-square&labelColor=0a0a0a" alt="Live Catalog"/></a>
+</p>
+
 Community-contributed project specs for [specdriven.sh](https://specdriven.sh), part of the **Spec Driven Development (SDD)** ecosystem - a methodology for using AI-generated specifications to accelerate software development.
 
 A **spec** is a complete project blueprint - a tech stack, architecture, and set of skills bundled into a starting point you can scaffold from. Browse the live library at [specdriven.sh/specs](https://specdriven.sh/specs).
