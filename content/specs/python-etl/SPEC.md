@@ -1,25 +1,16 @@
 ---
-title: python-etl
-slug: python-etl
-description: Modular ETL pipeline with Airflow orchestration, dbt transforms, and S3 staging.
-category: data
-stack: [Python, Airflow, dbt, PostgreSQL, S3]
-skills: [docs-generator, test-writer, ci-debugger]
-tags: [etl, airflow, dbt, s3, pipeline, python]
-author: community
-updated: 2026-01-15
-complexity: production
+name: python-etl
+description: "Modular ETL pipeline with Airflow orchestration, dbt transforms, and S3 staging."
 ---
-
 ## What's included
 
 A production ETL framework organised around three distinct stages: extract, load, and transform. Raw data lands in S3 via idempotent extractor tasks, is loaded into a PostgreSQL staging schema, and then transformed into analytics-ready tables by dbt models. Airflow schedules and monitors the full pipeline.
 
-The spec ships with pre-built extractors for common sources — REST APIs, SFTP, and relational databases — and a base class that makes adding new sources straightforward. All extractors are idempotent: re-running a pipeline window produces no duplicates.
+The spec ships with pre-built extractors for common sources - REST APIs, SFTP, and relational databases - and a base class that makes adding new sources straightforward. All extractors are idempotent: re-running a pipeline window produces no duplicates.
 
 ## Architecture
 
-Airflow DAGs live in `dags/` and are intentionally thin — they declare dependencies and pass parameters, but no business logic. Extractor classes in `etl/extractors/` handle source-specific concerns. The `etl/loaders/` package writes raw payloads to S3 and then bulk-loads them into Postgres staging tables using `COPY`.
+Airflow DAGs live in `dags/` and are intentionally thin - they declare dependencies and pass parameters, but no business logic. Extractor classes in `etl/extractors/` handle source-specific concerns. The `etl/loaders/` package writes raw payloads to S3 and then bulk-loads them into Postgres staging tables using `COPY`.
 
 dbt models in `transforms/` layer analytical views on top of the staging schema. Source freshness tests and schema tests run after every pipeline execution. A data quality DAG runs separately on a slower cadence and pages on failures.
 

@@ -1,0 +1,27 @@
+{
+  "title": "aws-terraform",
+  "category": "infra",
+  "stack": [
+    "Terraform",
+    "AWS",
+    "GitHub Actions",
+    "Atlantis"
+  ],
+  "skills": [
+    "terraform-architect",
+    "security-auditor",
+    "ci-debugger"
+  ],
+  "tags": [
+    "aws",
+    "terraform",
+    "ecs",
+    "fargate",
+    "rds",
+    "atlantis",
+    "iac"
+  ],
+  "author": "anthropic",
+  "updated": "2026-04-26",
+  "complexity": "enterprise"
+}

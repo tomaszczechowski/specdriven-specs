@@ -1,16 +1,7 @@
 ---
-title: aws-terraform
-slug: aws-terraform
-description: AWS infrastructure blueprint with VPC, ECS Fargate, RDS, and full CI/CD via Atlantis.
-category: infra
-stack: [Terraform, AWS, GitHub Actions, Atlantis]
-skills: [terraform-architect, security-auditor, ci-debugger]
-tags: [aws, terraform, ecs, fargate, rds, atlantis, iac]
-author: anthropic
-updated: 2026-04-26
-complexity: enterprise
+name: aws-terraform
+description: "AWS infrastructure blueprint with VPC, ECS Fargate, RDS, and full CI/CD via Atlantis."
 ---
-
 ## What's included
 
 A battle-tested AWS infrastructure blueprint covering networking, compute, data, and delivery. The VPC module provisions public and private subnets across three availability zones with NAT gateways and VPC flow logs enabled. ECS Fargate runs containerised workloads with auto-scaling policies and ALB target groups. RDS PostgreSQL runs in Multi-AZ with automated backups and a read replica for analytics.

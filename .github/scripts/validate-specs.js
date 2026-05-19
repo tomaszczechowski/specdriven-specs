@@ -4,21 +4,15 @@ const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 
+const ENTRY_FILENAME = "SPEC.md";
+const METADATA_FILENAME = "specdriven-metadata.json";
+
 const VALID_CATEGORIES = ["webapp", "api", "mobile", "data", "cli", "infra"];
 const VALID_COMPLEXITY = ["starter", "production", "enterprise"];
 
-const REQUIRED_FIELDS = [
-    "title",
-    "slug",
-    "description",
-    "category",
-    "stack",
-    "skills",
-    "tags",
-    "author",
-    "updated",
-    "complexity",
-];
+const SPEC_REQUIRED_FRONTMATTER = ["name", "description"];
+const METADATA_REQUIRED_LOCAL = ["title", "category", "stack", "skills", "tags", "author", "updated", "complexity"];
+const METADATA_REQUIRED_EXTERNAL = ["title", "description", "category", "stack", "skills", "tags", "author", "updated", "complexity", "source"];
 
 const ALLOWED_EXTENSIONS = new Set([
     ".mdx",
@@ -42,8 +36,8 @@ const ALLOWED_EXTENSIONS = new Set([
 ]);
 
 const MAX_FILES_PER_SPEC = 50;
-const MAX_FILE_BYTES = 5 * 1024 * 1024; // 5 MB
-const MAX_TOTAL_BYTES = 30 * 1024 * 1024; // 30 MB
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 30 * 1024 * 1024;
 const MIN_WORDS = 100;
 
 const RED = "\x1b[31m";
@@ -97,43 +91,100 @@ function walkDir(root) {
     return results;
 }
 
-function validateEntryFrontmatter(slug, content) {
+function validateSpecFile(slug, entryPath) {
     let parsed;
 
     try {
-        parsed = matter(content);
+        parsed = matter(fs.readFileSync(entryPath, "utf8"));
     } catch (err) {
-        error(`  ❌ Invalid YAML frontmatter: ${err.message}`);
+        error(`  ❌ ${ENTRY_FILENAME}: Invalid YAML frontmatter: ${err.message}`);
 
         return false;
     }
 
-    if (!parsed.data || Object.keys(parsed.data).length === 0) {
-        error(`  ❌ No frontmatter found`);
-
-        return false;
-    }
-
-    const fm = parsed.data;
-    const body = parsed.content;
+    const fm = parsed.data ?? {};
+    const body = parsed.content ?? "";
     let valid = true;
 
-    for (const field of REQUIRED_FIELDS) {
+    for (const field of SPEC_REQUIRED_FRONTMATTER) {
         if (!(field in fm)) {
-            error(`  ❌ Missing required field: ${field}`);
+            error(`  ❌ ${ENTRY_FILENAME}: missing required field "${field}"`);
             valid = false;
         }
     }
 
     if (!valid) return false;
 
-    if (fm.slug !== slug) {
-        error(`  ❌ Slug "${fm.slug}" doesn't match directory "${slug}"`);
+    if (fm.name !== slug) {
+        error(`  ❌ ${ENTRY_FILENAME}: name "${fm.name}" doesn't match directory "${slug}"`);
         valid = false;
     }
 
-    if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(fm.slug)) {
-        error(`  ❌ Slug must be kebab-case: "${fm.slug}"`);
+    if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(fm.name)) {
+        error(`  ❌ ${ENTRY_FILENAME}: name must be kebab-case: "${fm.name}"`);
+        valid = false;
+    }
+
+    if (typeof fm.description !== "string" || fm.description.length === 0 || fm.description.length > 150) {
+        error(`  ❌ ${ENTRY_FILENAME}: description must be a non-empty string, max 150 chars`);
+        valid = false;
+    }
+
+    const wordCount = body.split(/\s+/).filter((w) => w.length > 0).length;
+
+    if (wordCount < MIN_WORDS) {
+        error(`  ❌ ${ENTRY_FILENAME}: content too short: ${wordCount} words (minimum ${MIN_WORDS})`);
+        valid = false;
+    }
+
+    if (!body.includes("##")) {
+        warn(`  ⚠️  ${ENTRY_FILENAME}: no markdown headers found`);
+    }
+
+    return valid;
+}
+
+function validateMetadataFile(slug, metaPath, isExternal) {
+    let metadata;
+
+    try {
+        metadata = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+    } catch (err) {
+        error(`  ❌ ${METADATA_FILENAME}: invalid JSON: ${err.message}`);
+
+        return false;
+    }
+
+    let valid = true;
+    const required = isExternal ? METADATA_REQUIRED_EXTERNAL : METADATA_REQUIRED_LOCAL;
+
+    for (const field of required) {
+        if (!(field in metadata)) {
+            error(`  ❌ ${METADATA_FILENAME}: missing required field "${field}"`);
+            valid = false;
+        }
+    }
+
+    if (!valid) return false;
+
+    if (metadata.source !== undefined) {
+        const s = metadata.source;
+        if (typeof s !== "object" || s === null || typeof s.url !== "string" || !/^https?:\/\//.test(s.url)) {
+            error(`  ❌ ${METADATA_FILENAME}: source.url must be a valid http(s) URL`);
+            valid = false;
+        }
+        if (s && s.homepage !== undefined && (typeof s.homepage !== "string" || !/^https?:\/\//.test(s.homepage))) {
+            error(`  ❌ ${METADATA_FILENAME}: source.homepage must be a valid http(s) URL`);
+            valid = false;
+        }
+        if (s && s.license !== undefined && typeof s.license !== "string") {
+            error(`  ❌ ${METADATA_FILENAME}: source.license must be a string`);
+            valid = false;
+        }
+    }
+
+    if (isExternal && (typeof metadata.description !== "string" || metadata.description.length === 0 || metadata.description.length > 150)) {
+        error(`  ❌ ${METADATA_FILENAME}: description must be a non-empty string (≤150 chars) for external entries`);
         valid = false;
     }
 
@@ -144,21 +195,13 @@ function validateEntryFrontmatter(slug, content) {
             msg: "must be a non-empty string, max 80 chars",
         },
         {
-            field: "description",
-            ok: (v) => typeof v === "string" && v.length > 0 && v.length <= 150,
-            msg: "must be a non-empty string, max 150 chars",
-        },
-        {
             field: "category",
             ok: (v) => VALID_CATEGORIES.includes(v),
             msg: `must be one of: ${VALID_CATEGORIES.join(", ")}`,
         },
         {
             field: "stack",
-            ok: (v) =>
-                Array.isArray(v) &&
-                v.length > 0 &&
-                v.every((t) => typeof t === "string" && t.length > 0),
+            ok: (v) => Array.isArray(v) && v.length > 0 && v.every((t) => typeof t === "string" && t.length > 0),
             msg: "must be a non-empty array of strings",
         },
         {
@@ -181,12 +224,8 @@ function validateEntryFrontmatter(slug, content) {
         },
         {
             field: "updated",
-            ok: (v) => {
-                const str = v instanceof Date ? v.toISOString().slice(0, 10) : String(v);
-
-                return /^\d{4}-\d{2}-\d{2}$/.test(str);
-            },
-            msg: "must be an ISO date (YYYY-MM-DD)",
+            ok: (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v),
+            msg: "must be an ISO date string (YYYY-MM-DD)",
         },
         {
             field: "complexity",
@@ -196,25 +235,14 @@ function validateEntryFrontmatter(slug, content) {
     ];
 
     for (const c of checks) {
-        if (!c.ok(fm[c.field])) {
-            error(`  ❌ ${c.field}: ${c.msg}`);
+        if (!c.ok(metadata[c.field])) {
+            error(`  ❌ ${METADATA_FILENAME}: ${c.field}: ${c.msg}`);
             valid = false;
         }
     }
 
-    const wordCount = body.split(/\s+/).filter((w) => w.length > 0).length;
-
-    if (wordCount < MIN_WORDS) {
-        error(`  ❌ Content too short: ${wordCount} words (minimum ${MIN_WORDS})`);
-        valid = false;
-    }
-
-    if (fm.title && fm.title.length > 60) {
-        warn(`  ⚠️  title is long (${fm.title.length} chars)`);
-    }
-
-    if (!body.includes("##")) {
-        warn(`  ⚠️  No markdown headers found (expected ## What's included, etc.)`);
+    if (metadata.title && metadata.title.length > 60) {
+        warn(`  ⚠️  ${METADATA_FILENAME}: title is long (${metadata.title.length} chars)`);
     }
 
     return valid;
@@ -231,10 +259,25 @@ function validateSpecDirectory(specDir) {
         return false;
     }
 
-    const entryPath = path.join(specDir, `${slug}.mdx`);
+    const entryPath = path.join(specDir, ENTRY_FILENAME);
+    const metaPath = path.join(specDir, METADATA_FILENAME);
 
-    if (!fs.existsSync(entryPath)) {
-        error(`  ❌ Missing entry file: ${slug}.mdx`);
+    if (!fs.existsSync(metaPath)) {
+        error(`  ❌ Missing metadata file: ${METADATA_FILENAME}`);
+
+        return false;
+    }
+
+    let probeMetadata;
+    try {
+        probeMetadata = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+    } catch {
+        probeMetadata = {};
+    }
+    const isExternal = !!(probeMetadata && probeMetadata.source && typeof probeMetadata.source.url === "string");
+
+    if (!isExternal && !fs.existsSync(entryPath)) {
+        error(`  ❌ Missing entry file: ${ENTRY_FILENAME} (required for local entries; set metadata.source.url for external)`);
 
         return false;
     }
@@ -257,7 +300,7 @@ function validateSpecDirectory(specDir) {
         const ext = path.extname(rel).toLowerCase();
 
         if (!ALLOWED_EXTENSIONS.has(ext)) {
-            error(`  ❌ Disallowed file extension: ${rel} (allowed: ${[...ALLOWED_EXTENSIONS].join(", ")})`);
+            error(`  ❌ Disallowed file extension: ${rel}`);
             valid = false;
             continue;
         }
@@ -286,14 +329,14 @@ function validateSpecDirectory(specDir) {
         valid = false;
     }
 
-    const entryContent = fs.readFileSync(entryPath, "utf-8");
-
-    if (!validateEntryFrontmatter(slug, entryContent)) {
-        valid = false;
-    }
+    // Local entries require SPEC.md; external entries optionally include it as curated commentary.
+    if (fs.existsSync(entryPath) && !validateSpecFile(slug, entryPath)) valid = false;
+    if (!validateMetadataFile(slug, metaPath, isExternal)) valid = false;
 
     if (valid) {
-        success(`  ✅ Valid (${fileCount} file${fileCount === 1 ? "" : "s"}, ${totalBytes} bytes)`);
+        const tag = isExternal ? " (external)" : "";
+
+        success(`  ✅ Valid${tag} (${fileCount} file${fileCount === 1 ? "" : "s"}, ${totalBytes} bytes)`);
     }
 
     return valid;
@@ -330,9 +373,7 @@ if (targets.length === 0) {
 let allValid = true;
 
 for (const target of targets) {
-    if (!validateSpecDirectory(target)) {
-        allValid = false;
-    }
+    if (!validateSpecDirectory(target)) allValid = false;
 }
 
 log("");

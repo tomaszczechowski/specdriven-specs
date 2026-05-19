@@ -1,16 +1,7 @@
 ---
-title: fastapi-service
-slug: fastapi-service
-description: Async REST API with FastAPI, Alembic migrations, Redis caching, and background tasks.
-category: api
-stack: [FastAPI, PostgreSQL, Docker, Redis, Celery]
-skills: [api-designer, test-writer, security-auditor, docs-generator]
-tags: [fastapi, async, rest, celery, redis, python]
-author: community
-updated: 2026-03-18
-complexity: production
+name: fastapi-service
+description: "Async REST API with FastAPI, Alembic migrations, Redis caching, and background tasks."
 ---
-
 ## What's included
 
 A production-grade async REST API built on FastAPI with PostgreSQL persistence via SQLAlchemy 2.0 and Alembic for schema migrations. Redis handles response caching and Celery task queuing. The spec ships with Docker Compose for local development and a multi-stage Dockerfile optimised for minimal production image size.
@@ -21,7 +12,7 @@ Authentication uses JWT bearer tokens with refresh token rotation. Rate limiting
 
 The project follows a clean layered structure: `api/routers/` for route handlers, `api/services/` for business logic, `api/repositories/` for database access, and `api/schemas/` for Pydantic models. Dependency injection wires services and repositories through FastAPI's `Depends` system, keeping handlers thin and testable.
 
-Background tasks — email delivery, webhook dispatch, report generation — run in Celery workers that share the same SQLAlchemy session factory as the main app. Flower provides a real-time task monitoring UI accessible during development.
+Background tasks - email delivery, webhook dispatch, report generation - run in Celery workers that share the same SQLAlchemy session factory as the main app. Flower provides a real-time task monitoring UI accessible during development.
 
 ## Getting started
 

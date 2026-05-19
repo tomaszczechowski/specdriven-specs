@@ -1,0 +1,25 @@
+{
+  "title": "expo-mobile",
+  "category": "mobile",
+  "stack": [
+    "Expo",
+    "React Native",
+    "TypeScript",
+    "Zustand",
+    "TanStack Query"
+  ],
+  "skills": [
+    "code-reviewer",
+    "test-writer"
+  ],
+  "tags": [
+    "expo",
+    "react-native",
+    "mobile",
+    "offline",
+    "typescript"
+  ],
+  "author": "community",
+  "updated": "2026-02-28",
+  "complexity": "starter"
+}

@@ -1,0 +1,16 @@
+{
+  "title": "T3 Stack",
+  "description": "Type-safe full-stack starter - Next.js, tRPC, Prisma, NextAuth, Tailwind. Curated, hosted upstream.",
+  "category": "webapp",
+  "stack": ["Next.js", "TypeScript", "tRPC", "Prisma", "NextAuth", "Tailwind"],
+  "skills": ["code-reviewer", "e2e-playwright"],
+  "tags": ["t3", "trpc", "nextjs", "type-safety", "fullstack"],
+  "author": "t3-oss",
+  "updated": "2026-05-14",
+  "complexity": "production",
+  "source": {
+    "url": "https://github.com/t3-oss/create-t3-app/tree/main/cli/template/base",
+    "homepage": "https://create.t3.gg/",
+    "license": "MIT"
+  }
+}
