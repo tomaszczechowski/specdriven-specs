@@ -1,0 +1,10 @@
+{
+  "title": "NestJS API",
+  "category": "api",
+  "stack": ["NestJS 10", "TypeScript", "Prisma", "PostgreSQL", "Redis", "BullMQ", "Apollo GraphQL", "Passport"],
+  "skills": ["api-designer", "test-writer", "openapi-spec", "security-auditor"],
+  "tags": ["nestjs", "graphql", "rest", "prisma", "bullmq", "typescript"],
+  "author": "specdriven",
+  "updated": "2026-05-20",
+  "complexity": "production"
+}

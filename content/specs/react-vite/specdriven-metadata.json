@@ -1,0 +1,10 @@
+{
+  "title": "React + Vite SPA",
+  "category": "webapp",
+  "stack": ["React 19", "Vite 5", "TypeScript", "TanStack Router", "TanStack Query", "Tailwind", "Zod", "react-hook-form"],
+  "skills": ["code-reviewer", "test-writer", "e2e-playwright", "refactor-assistant"],
+  "tags": ["react", "vite", "spa", "tanstack", "typescript", "frontend"],
+  "author": "specdriven",
+  "updated": "2026-05-20",
+  "complexity": "production"
+}

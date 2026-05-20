@@ -1,0 +1,10 @@
+{
+  "title": "Go HTTP Service",
+  "category": "api",
+  "stack": ["Go", "chi", "sqlc", "pgx", "PostgreSQL", "OpenTelemetry", "golang-migrate"],
+  "skills": ["code-reviewer", "test-writer", "api-designer", "security-auditor"],
+  "tags": ["go", "golang", "rest", "sqlc", "chi", "postgres"],
+  "author": "specdriven",
+  "updated": "2026-05-20",
+  "complexity": "production"
+}

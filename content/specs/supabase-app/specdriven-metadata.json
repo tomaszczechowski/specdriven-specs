@@ -1,0 +1,10 @@
+{
+  "title": "Supabase + Next.js",
+  "category": "webapp",
+  "stack": ["Next.js 15", "TypeScript", "Supabase", "PostgreSQL", "Tailwind", "Zod"],
+  "skills": ["database-schema", "code-reviewer", "security-auditor", "test-writer"],
+  "tags": ["supabase", "nextjs", "postgres", "rls", "auth", "realtime"],
+  "author": "specdriven",
+  "updated": "2026-05-20",
+  "complexity": "starter"
+}
