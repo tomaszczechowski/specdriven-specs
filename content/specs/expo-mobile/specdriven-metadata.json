@@ -1,25 +1,26 @@
 {
-  "title": "expo-mobile",
+  "title": "Expo Mobile",
   "category": "mobile",
-  "stack": [
-    "Expo",
-    "React Native",
-    "TypeScript",
-    "Zustand",
-    "TanStack Query"
-  ],
+  "stack": ["Expo SDK 52", "React Native", "TypeScript", "Expo Router", "Zustand", "TanStack Query", "NativeWind"],
   "skills": {
     "internal": [],
-    "external": []
+    "external": [
+      {
+        "name": "api-designer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill api-designer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/api-designer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      }
+    ]
   },
-  "tags": [
-    "expo",
-    "react-native",
-    "mobile",
-    "offline",
-    "typescript"
-  ],
+  "tags": ["expo", "react-native", "mobile", "offline", "typescript", "ios", "android"],
   "author": "community",
-  "updated": "2026-02-28",
+  "updated": "2026-05-21",
   "complexity": "starter"
 }

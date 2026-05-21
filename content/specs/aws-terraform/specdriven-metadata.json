@@ -1,26 +1,26 @@
 {
-  "title": "aws-terraform",
+  "title": "AWS Terraform",
   "category": "infra",
-  "stack": [
-    "Terraform",
-    "AWS",
-    "GitHub Actions",
-    "Atlantis"
-  ],
+  "stack": ["Terraform", "AWS", "ECS Fargate", "RDS PostgreSQL", "GitHub Actions", "Atlantis"],
   "skills": {
     "internal": [],
-    "external": []
+    "external": [
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      },
+      {
+        "name": "code-reviewer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill code-reviewer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/code-reviewer",
+        "author": "skills.sh"
+      }
+    ]
   },
-  "tags": [
-    "aws",
-    "terraform",
-    "ecs",
-    "fargate",
-    "rds",
-    "atlantis",
-    "iac"
-  ],
+  "tags": ["aws", "terraform", "ecs", "fargate", "rds", "atlantis", "iac"],
   "author": "anthropic",
-  "updated": "2026-04-26",
+  "updated": "2026-05-21",
   "complexity": "enterprise"
 }

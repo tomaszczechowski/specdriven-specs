@@ -1,24 +1,32 @@
 {
-  "title": "node-cli",
+  "title": "Node CLI",
   "category": "cli",
-  "stack": [
-    "Node.js",
-    "TypeScript",
-    "Commander.js",
-    "Ink"
-  ],
+  "stack": ["Node.js", "TypeScript 5.4", "Commander.js", "Ink", "Vitest", "Changesets"],
   "skills": {
     "internal": [],
-    "external": []
+    "external": [
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "api-designer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill api-designer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/api-designer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "code-reviewer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill code-reviewer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/code-reviewer",
+        "author": "skills.sh"
+      }
+    ]
   },
-  "tags": [
-    "cli",
-    "typescript",
-    "commander",
-    "ink",
-    "node"
-  ],
+  "tags": ["cli", "typescript", "commander", "ink", "node", "plugin"],
   "author": "anthropic",
-  "updated": "2026-03-05",
+  "updated": "2026-05-21",
   "complexity": "starter"
 }

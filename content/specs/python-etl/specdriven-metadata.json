@@ -1,26 +1,32 @@
 {
-  "title": "python-etl",
+  "title": "Python ETL",
   "category": "data",
-  "stack": [
-    "Python",
-    "Airflow",
-    "dbt",
-    "PostgreSQL",
-    "S3"
-  ],
+  "stack": ["Python", "Airflow 2.9", "dbt Core 1.8", "PostgreSQL 16", "S3", "Redis", "Celery"],
   "skills": {
     "internal": [],
-    "external": []
+    "external": [
+      {
+        "name": "database-schema-design",
+        "command": "npx skills add https://github.com/supercent-io/skills-template --skill database-schema-design",
+        "source": "https://www.skills.sh/supercent-io/skills-template/database-schema-design",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      }
+    ]
   },
-  "tags": [
-    "etl",
-    "airflow",
-    "dbt",
-    "s3",
-    "pipeline",
-    "python"
-  ],
+  "tags": ["etl", "airflow", "dbt", "s3", "pipeline", "python", "postgres"],
   "author": "community",
-  "updated": "2026-01-15",
+  "updated": "2026-05-21",
   "complexity": "production"
 }

@@ -1,26 +1,32 @@
 {
-  "title": "fastapi-service",
+  "title": "FastAPI Service",
   "category": "api",
-  "stack": [
-    "FastAPI",
-    "PostgreSQL",
-    "Docker",
-    "Redis",
-    "Celery"
-  ],
+  "stack": ["FastAPI 0.111", "Python 3.12", "PostgreSQL 16", "SQLAlchemy 2.0", "Alembic", "Redis", "Celery", "Docker"],
   "skills": {
     "internal": [],
-    "external": []
+    "external": [
+      {
+        "name": "api-designer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill api-designer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/api-designer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      }
+    ]
   },
-  "tags": [
-    "fastapi",
-    "async",
-    "rest",
-    "celery",
-    "redis",
-    "python"
-  ],
+  "tags": ["fastapi", "async", "rest", "celery", "redis", "python", "alembic"],
   "author": "community",
-  "updated": "2026-03-18",
+  "updated": "2026-05-21",
   "complexity": "production"
 }
