@@ -8,12 +8,10 @@
     "Redis",
     "Celery"
   ],
-  "skills": [
-    "api-designer",
-    "test-writer",
-    "security-auditor",
-    "docs-generator"
-  ],
+  "skills": {
+    "internal": [],
+    "external": []
+  },
   "tags": [
     "fastapi",
     "async",

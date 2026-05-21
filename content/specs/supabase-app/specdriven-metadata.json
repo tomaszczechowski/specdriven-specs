@@ -2,7 +2,35 @@
   "title": "Supabase + Next.js",
   "category": "webapp",
   "stack": ["Next.js 15", "TypeScript", "Supabase", "PostgreSQL", "Tailwind", "Zod"],
-  "skills": ["database-schema", "code-reviewer", "security-auditor", "test-writer"],
+  "skills": {
+    "internal": [],
+    "external": [
+      {
+        "name": "database-schema-design",
+        "command": "npx skills add https://github.com/supercent-io/skills-template --skill database-schema-design",
+        "source": "https://www.skills.sh/supercent-io/skills-template/database-schema-design",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      }
+    ]
+  },
   "tags": ["supabase", "nextjs", "postgres", "rls", "auth", "realtime"],
   "author": "specdriven",
   "updated": "2026-05-20",

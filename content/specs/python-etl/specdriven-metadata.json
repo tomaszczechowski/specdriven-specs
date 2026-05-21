@@ -8,11 +8,10 @@
     "PostgreSQL",
     "S3"
   ],
-  "skills": [
-    "docs-generator",
-    "test-writer",
-    "ci-debugger"
-  ],
+  "skills": {
+    "internal": [],
+    "external": []
+  },
   "tags": [
     "etl",
     "airflow",

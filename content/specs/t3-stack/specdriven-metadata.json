@@ -3,7 +3,23 @@
   "description": "Type-safe full-stack starter - Next.js, tRPC, Prisma, NextAuth, Tailwind. Curated, hosted upstream.",
   "category": "webapp",
   "stack": ["Next.js", "TypeScript", "tRPC", "Prisma", "NextAuth", "Tailwind"],
-  "skills": ["code-reviewer", "e2e-playwright"],
+  "skills": {
+    "internal": [],
+    "external": [
+      {
+        "name": "code-reviewer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill code-reviewer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/code-reviewer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "e2e-playwright",
+        "command": "npx skills add https://github.com/anton-abyzov/specweave --skill e2e-playwright",
+        "source": "https://www.skills.sh/anton-abyzov/specweave/e2e-playwright",
+        "author": "skills.sh"
+      }
+    ]
+  },
   "tags": ["t3", "trpc", "nextjs", "type-safety", "fullstack"],
   "author": "t3-oss",
   "updated": "2026-05-14",

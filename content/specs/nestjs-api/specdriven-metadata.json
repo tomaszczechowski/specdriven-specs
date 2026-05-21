@@ -2,7 +2,35 @@
   "title": "NestJS API",
   "category": "api",
   "stack": ["NestJS 10", "TypeScript", "Prisma", "PostgreSQL", "Redis", "BullMQ", "Apollo GraphQL", "Passport"],
-  "skills": ["api-designer", "test-writer", "openapi-spec", "security-auditor"],
+  "skills": {
+    "internal": [],
+    "external": [
+      {
+        "name": "api-designer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill api-designer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/api-designer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "openapi-spec",
+        "command": "npx skills add https://github.com/wshobson/agents --skill openapi-spec-generation",
+        "source": "https://www.skills.sh/wshobson/agents/openapi-spec-generation",
+        "author": "skills.sh"
+      },
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      }
+    ]
+  },
   "tags": ["nestjs", "graphql", "rest", "prisma", "bullmq", "typescript"],
   "author": "specdriven",
   "updated": "2026-05-20",

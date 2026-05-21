@@ -8,10 +8,10 @@
     "Zustand",
     "TanStack Query"
   ],
-  "skills": [
-    "code-reviewer",
-    "test-writer"
-  ],
+  "skills": {
+    "internal": [],
+    "external": []
+  },
   "tags": [
     "expo",
     "react-native",

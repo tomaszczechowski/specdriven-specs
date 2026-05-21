@@ -2,7 +2,35 @@
   "title": "React + Vite SPA",
   "category": "webapp",
   "stack": ["React 19", "Vite 5", "TypeScript", "TanStack Router", "TanStack Query", "Tailwind", "Zod", "react-hook-form"],
-  "skills": ["code-reviewer", "test-writer", "e2e-playwright", "refactor-assistant"],
+  "skills": {
+    "internal": [],
+    "external": [
+      {
+        "name": "api-designer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill api-designer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/api-designer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "e2e-playwright",
+        "command": "npx skills add https://github.com/anton-abyzov/specweave --skill e2e-playwright",
+        "source": "https://www.skills.sh/anton-abyzov/specweave/e2e-playwright",
+        "author": "skills.sh"
+      },
+      {
+        "name": "test-writer",
+        "command": "npx skills add https://github.com/leonardomso/33-js-concepts --skill test-writer",
+        "source": "https://www.skills.sh/leonardomso/33-js-concepts/test-writer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "refactor-assistant",
+        "command": "npx skills add https://github.com/aidotnet/moyucode --skill refactor-assistant",
+        "source": "https://www.skills.sh/aidotnet/moyucode/refactor-assistant",
+        "author": "skills.sh"
+      }
+    ]
+  },
   "tags": ["react", "vite", "spa", "tanstack", "typescript", "frontend"],
   "author": "specdriven",
   "updated": "2026-05-20",

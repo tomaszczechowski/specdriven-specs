@@ -7,11 +7,10 @@
     "Commander.js",
     "Ink"
   ],
-  "skills": [
-    "test-writer",
-    "docs-generator",
-    "changelog-writer"
-  ],
+  "skills": {
+    "internal": [],
+    "external": []
+  },
   "tags": [
     "cli",
     "typescript",

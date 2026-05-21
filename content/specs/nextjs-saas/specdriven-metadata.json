@@ -2,7 +2,35 @@
   "title": "Next.js SaaS",
   "category": "webapp",
   "stack": ["Next.js 15", "TypeScript", "PostgreSQL", "Drizzle", "NextAuth", "Stripe", "Resend", "Tailwind", "Vercel"],
-  "skills": ["api-designer", "code-reviewer", "e2e-playwright", "security-auditor"],
+  "skills": {
+    "internal": [],
+    "external": [
+      {
+        "name": "api-designer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill api-designer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/api-designer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "e2e-playwright",
+        "command": "npx skills add https://github.com/anton-abyzov/specweave --skill e2e-playwright",
+        "source": "https://www.skills.sh/anton-abyzov/specweave/e2e-playwright",
+        "author": "skills.sh"
+      },
+      {
+        "name": "openapi-spec",
+        "command": "npx skills add https://github.com/wshobson/agents --skill openapi-spec-generation",
+        "source": "https://www.skills.sh/wshobson/agents/openapi-spec-generation",
+        "author": "skills.sh"
+      },
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      }
+    ]
+  },
   "tags": ["saas", "auth", "billing", "multi-tenancy", "nextjs", "stripe"],
   "author": "specdriven",
   "updated": "2026-05-14",

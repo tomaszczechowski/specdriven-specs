@@ -7,11 +7,10 @@
     "GitHub Actions",
     "Atlantis"
   ],
-  "skills": [
-    "terraform-architect",
-    "security-auditor",
-    "ci-debugger"
-  ],
+  "skills": {
+    "internal": [],
+    "external": []
+  },
   "tags": [
     "aws",
     "terraform",

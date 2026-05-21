@@ -152,7 +152,7 @@ Supabase Studio runs at `http://localhost:54323` once `supabase start` is up. Th
 
 ## Skills paired with this spec
 
-- `database-schema` — design Postgres tables and review RLS policies
+- `database-schema-design` — design Postgres tables and review RLS policies
 - `code-reviewer` — review prompts tuned for Next.js + Supabase patterns and the two-client convention
 - `security-auditor` — RLS policy verification, key handling, session hygiene, signed URL TTLs
 - `test-writer` — pgTAP + Playwright patterns for policy and flow tests
