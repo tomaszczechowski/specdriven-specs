@@ -16,4 +16,17 @@ Multi-tenancy is implemented at the database level using a `tenant_id` column on
 
 ## Getting started
 
-Run `npx specdriven add @specs/spec-example` to scaffold the project. Copy `.env.example` to `.env.local` and fill in your Postgres connection string, NextAuth secret, Stripe keys, and Resend API key. Run `pnpm db:migrate` to apply the initial schema, then `pnpm dev` to start the dev server.
+Run `npx specdriven add spec-example` to scaffold the project. Copy `.env.example` to `.env.local` and fill in your Postgres connection string, NextAuth secret, Stripe keys, and Resend API key. Run `pnpm db:migrate` to apply the initial schema, then `pnpm dev` to start the dev server.
+
+## Skills paired with this spec
+
+This spec bundles a small **internal skill** that lives inside `skills/tenant-rls-auditor/` and is installed automatically alongside the spec:
+
+- `tenant-rls-auditor` — audits the project's Postgres RLS policies for cross-tenant data leaks against the patterns this spec assumes.
+
+It also lists two **external skills** that the CLI will print after install. They run through the open `skills` ecosystem CLI on demand — copy-paste them when you're ready:
+
+- `code-reviewer` (skills.sh)
+- `security-auditor` (skills.sh)
+
+Add your own internal skills under `skills/<name>/`, or reference more external ones in `specdriven-metadata.json` under `skills.external`. The `command` field on each external entry is what the CLI prints verbatim.

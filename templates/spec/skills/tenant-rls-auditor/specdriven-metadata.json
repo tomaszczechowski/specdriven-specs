@@ -1,0 +1,17 @@
+{
+  "title": "Tenant RLS Auditor",
+  "category": "security",
+  "tools": [
+    "Claude",
+    "GPT",
+    "Cursor"
+  ],
+  "tags": [
+    "postgres",
+    "rls",
+    "multi-tenancy",
+    "security"
+  ],
+  "author": "Tomasz Czechowski",
+  "updated": "2026-05-21"
+}

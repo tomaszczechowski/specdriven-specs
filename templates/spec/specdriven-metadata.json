@@ -1,0 +1,40 @@
+{
+  "title": "Spec Example",
+  "category": "webapp",
+  "stack": [
+    "Next.js",
+    "PostgreSQL",
+    "Tailwind",
+    "Stripe",
+    "Resend"
+  ],
+  "skills": {
+    "internal": [
+      "tenant-rls-auditor"
+    ],
+    "external": [
+      {
+        "name": "code-reviewer",
+        "command": "npx skills add https://github.com/jeffallan/claude-skills --skill code-reviewer",
+        "source": "https://www.skills.sh/jeffallan/claude-skills/code-reviewer",
+        "author": "skills.sh"
+      },
+      {
+        "name": "security-auditor",
+        "command": "npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill security-auditor",
+        "source": "https://www.skills.sh/sickn33/antigravity-awesome-skills/security-auditor",
+        "author": "skills.sh"
+      }
+    ]
+  },
+  "tags": [
+    "saas",
+    "auth",
+    "billing",
+    "multi-tenancy",
+    "nextjs"
+  ],
+  "author": "Tomasz Czechowski",
+  "updated": "2026-05-21",
+  "complexity": "production"
+}
