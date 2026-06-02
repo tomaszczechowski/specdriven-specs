@@ -1,7 +1,16 @@
 {
   "title": "React + Vite SPA",
   "category": "webapp",
-  "stack": ["React 19", "Vite 5", "TypeScript", "TanStack Router", "TanStack Query", "Tailwind", "Zod", "react-hook-form"],
+  "stack": [
+    "React 19",
+    "Vite 5",
+    "TypeScript",
+    "TanStack Router",
+    "TanStack Query",
+    "Tailwind",
+    "Zod",
+    "react-hook-form"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -31,8 +40,22 @@
       }
     ]
   },
-  "tags": ["react", "vite", "spa", "tanstack", "typescript", "frontend"],
+  "tags": [
+    "react",
+    "vite",
+    "spa",
+    "tanstack",
+    "typescript",
+    "frontend"
+  ],
   "author": "specdriven",
   "updated": "2026-05-20",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

@@ -1,7 +1,16 @@
 {
   "title": "FastAPI Service",
   "category": "api",
-  "stack": ["FastAPI 0.111", "Python 3.12", "PostgreSQL 16", "SQLAlchemy 2.0", "Alembic", "Redis", "Celery", "Docker"],
+  "stack": [
+    "FastAPI 0.111",
+    "Python 3.12",
+    "PostgreSQL 16",
+    "SQLAlchemy 2.0",
+    "Alembic",
+    "Redis",
+    "Celery",
+    "Docker"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -25,8 +34,23 @@
       }
     ]
   },
-  "tags": ["fastapi", "async", "rest", "celery", "redis", "python", "alembic"],
+  "tags": [
+    "fastapi",
+    "async",
+    "rest",
+    "celery",
+    "redis",
+    "python",
+    "alembic"
+  ],
   "author": "community",
   "updated": "2026-05-21",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

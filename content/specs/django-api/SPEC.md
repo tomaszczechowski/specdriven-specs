@@ -32,7 +32,7 @@ def create_user(*, email: str, password: str, name: str) -> User:
 
 Views call services. Tests call services directly. Logic is never inside a serializer's `create()`/`update()` or a view method. Serializers are for shape; services are for behaviour.
 
-**Permissions are explicit per ViewSet.** Each ViewSet declares its `permission_classes` and, where needed, an `IsObjectOwner` permission that checks the row belongs to the requester. Object permissions are tested per view in the test suite — a missing `IsObjectOwner` is a security bug, not a refactoring nuance.
+**Permissions are explicit per ViewSet.** Each ViewSet declares its `permission_classes` and, where needed, an `IsObjectOwner` permission that checks the row belongs to the requester. Object permissions are tested per view in the test suite — a missing `IsObjectOwner` is a security bug, not a refactoring nuance
 
 **Celery tasks are idempotent and small.** Each task does one thing. Heavy workflows are chains (`task.s() | task.s()`) or chords, not monolithic functions. Tasks accept primitive arguments (IDs, not model instances) so they survive serialization through Redis:
 

@@ -1,7 +1,16 @@
 {
   "title": "Django REST API",
   "category": "api",
-  "stack": ["Django 5", "Django REST Framework", "Python", "PostgreSQL", "Celery", "Redis", "drf-spectacular", "pytest"],
+  "stack": [
+    "Django 5",
+    "Django REST Framework",
+    "Python",
+    "PostgreSQL",
+    "Celery",
+    "Redis",
+    "drf-spectacular",
+    "pytest"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -31,8 +40,22 @@
       }
     ]
   },
-  "tags": ["django", "drf", "python", "rest", "celery", "postgres"],
+  "tags": [
+    "django",
+    "drf",
+    "python",
+    "rest",
+    "celery",
+    "postgres"
+  ],
   "author": "specdriven",
   "updated": "2026-05-20",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

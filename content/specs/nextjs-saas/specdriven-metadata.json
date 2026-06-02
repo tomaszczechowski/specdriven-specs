@@ -1,7 +1,17 @@
 {
   "title": "Next.js SaaS",
   "category": "webapp",
-  "stack": ["Next.js 15", "TypeScript", "PostgreSQL", "Drizzle", "NextAuth", "Stripe", "Resend", "Tailwind", "Vercel"],
+  "stack": [
+    "Next.js 15",
+    "TypeScript",
+    "PostgreSQL",
+    "Drizzle",
+    "NextAuth",
+    "Stripe",
+    "Resend",
+    "Tailwind",
+    "Vercel"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -31,8 +41,22 @@
       }
     ]
   },
-  "tags": ["saas", "auth", "billing", "multi-tenancy", "nextjs", "stripe"],
+  "tags": [
+    "saas",
+    "auth",
+    "billing",
+    "multi-tenancy",
+    "nextjs",
+    "stripe"
+  ],
   "author": "specdriven",
   "updated": "2026-05-14",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }
