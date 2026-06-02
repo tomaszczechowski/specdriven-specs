@@ -260,7 +260,7 @@ function validateMetadataFile(slug, metaPath, isExternal) {
       msg: "must be a non-empty array of strings",
     },
     {
-      field: "internal skills",
+      field: "skills",
       ok: ({ internal }) =>
         Array.isArray(internal) &&
         (internal.length === 0 ||
@@ -270,7 +270,7 @@ function validateMetadataFile(slug, metaPath, isExternal) {
                 typeof t === "string" &&
                 /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(t),
             ))),
-      msg: "must be a non-empty array of kebab-case skill slugs",
+      msg: "internal must be a non-empty array of kebab-case skill slugs",
     },
     {
       field: "tags",
