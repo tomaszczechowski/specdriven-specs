@@ -45,8 +45,8 @@ if (credentialsMissing) {
 
 const ReviewSchema = z.object({
   status: z.enum(["pass", "warn", "fail"]),
-  score: z.number().int().min(0).max(100),
-  notes: z.string().max(220),
+  score: z.number().min(0).max(100).transform(Math.round),
+  notes: z.string().transform((s) => s.slice(0, 220)),
 });
 
 const SYSTEM_PROMPT = `You are a senior staff engineer reviewing community-contributed specs for specdriven.sh — a catalog of opinionated, production-grade project blueprints (SDD: Spec Driven Development).

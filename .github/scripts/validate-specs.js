@@ -260,12 +260,12 @@ function validateMetadataFile(slug, metaPath, isExternal) {
       msg: "must be a non-empty array of strings",
     },
     {
-      field: "skills",
-      ok: (v) =>
-        Array.isArray(v) &&
-        (v.length === 0 ||
-          (v.length > 0 &&
-            v.every(
+      field: "internal skills",
+      ok: ({ internal }) =>
+        Array.isArray(internal) &&
+        (internal.length === 0 ||
+          (internal.length > 0 &&
+            internal.every(
               (t) =>
                 typeof t === "string" &&
                 /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(t),
