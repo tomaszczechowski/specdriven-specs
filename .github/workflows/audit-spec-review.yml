@@ -1,8 +1,7 @@
 name: Audit Spec Review
 
-# Runs the Spec Review auditor against every spec on a nightly schedule
-# (commits refreshed results back to main) and on PRs that touch spec content
-# (posts a comment, fails the check on fail-status results).
+# Runs the Spec Review auditor on PRs touching spec content, on pushes to main
+# (immediately after a merge), and on a nightly schedule.
 #
 # All github.event values flow through env: vars before reaching run: scripts
 # to avoid actions-injection vectors. See:
@@ -15,6 +14,10 @@ name: Audit Spec Review
 
 on:
   pull_request:
+    paths:
+      - "content/specs/**"
+  push:
+    branches: [main]
     paths:
       - "content/specs/**"
   schedule:
@@ -47,17 +50,23 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.event.after }}
         run: |
           if [ "$EVENT_NAME" = "pull_request" ]; then
             changed=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- 'content/specs/*' | awk -F/ '{print $3}' | sort -u | paste -sd, -)
             printf 'filter=%s\n' "$changed" >> "$GITHUB_OUTPUT"
             printf 'Reviewing PR-touched specs: %s\n' "$changed"
+          elif [ "$EVENT_NAME" = "push" ]; then
+            changed=$(git diff --name-only "$BEFORE_SHA" "$AFTER_SHA" -- 'content/specs/*' | awk -F/ '{print $3}' | sort -u | paste -sd, -)
+            printf 'filter=%s\n' "$changed" >> "$GITHUB_OUTPUT"
+            printf 'Reviewing pushed specs: %s\n' "$changed"
           else
             printf 'filter=\n' >> "$GITHUB_OUTPUT"
             printf 'Reviewing all specs\n'
           fi
 
-      - name: Run Audit Spec Review auditor
+      - name: Run Spec Review auditor
         id: review
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -65,14 +74,27 @@ jobs:
           SPECS_FILTER: ${{ steps.filter.outputs.filter }}
         run: node .github/scripts/audit-spec-review.mjs
 
-      - name: Commit refreshed reviews (cron / manual only)
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: Commit audit results to PR branch (same-repo PRs only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           if [ -n "$(git status --porcelain content/specs)" ]; then
             git config user.name "specdriven-bot"
             git config user.email "bot@specdriven.sh"
             git add content/specs
-            git commit -m "chore(audits): refresh audit spec review scores ($(date -u +%Y-%m-%d))"
+            git commit -m "chore(audits): add spec review scores"
+            git push origin "HEAD:$HEAD_REF"
+          fi
+
+      - name: Commit refreshed reviews (push / cron / manual only)
+        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          if [ -n "$(git status --porcelain content/specs)" ]; then
+            git config user.name "specdriven-bot"
+            git config user.email "bot@specdriven.sh"
+            git add content/specs
+            git commit -m "chore(audits): refresh spec review scores ($(date -u +%Y-%m-%d))"
             git push
           else
             echo "No review changes to commit."
@@ -99,14 +121,14 @@ jobs:
               if (!r) continue;
               const score = typeof r.score === "number" ? ` · ${r.score}` : "";
               const badge = r.status === "pass" ? "✅" : r.status === "warn" ? "⚠️" : r.status === "fail" ? "❌" : "❓";
-              const note = r.notes ? ` — ${r.notes}` : "";
+              const note = r.status !== "pass" && r.notes ? ` — ${r.notes}` : "";
               rows.push(`| \`${slug}\` | ${badge} **${r.status}**${score} | ${r.checked} |${note} |`);
             }
 
             const failures = Number(process.env.FAILURES || 0);
             const header = failures > 0
               ? `### ❌ Audit Spec Review — ${failures} spec${failures === 1 ? "" : "s"} below quality bar`
-              : `### ✅ Audit  Spec Review`;
+              : `### ✅ Audit Spec Review`;
 
             const body = rows.length
               ? `${header}\n\n| Spec | Status | Checked | Notes |\n|------|--------|---------|-------|\n${rows.join("\n")}\n\n_Score thresholds: 80+ pass · 60-79 warn · <60 fail. Reviewed against \`SPEC_REQUIREMENTS.md\`._`
