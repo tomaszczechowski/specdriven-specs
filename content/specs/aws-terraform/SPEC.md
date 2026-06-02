@@ -9,7 +9,7 @@ A battle-tested AWS infrastructure blueprint covering networking, compute, data,
 
 **Atlantis** manages Terraform plan and apply via pull request comments, enforcing the GitOps workflow — no `terraform apply` from local machines after initial bootstrap. State lives in **S3 with versioning enabled** and **DynamoDB locking** to prevent concurrent applies. A nightly **GitHub Actions** workflow runs `terraform plan` against each environment and posts a Slack alert on drift.
 
-Security defaults throughout: security group rules reference resource IDs not CIDR ranges wherever possible; all ingress to the application tier flows through the ALB; no SSH ports open; no public IP assignment on Fargate tasks. **Checkov** runs in CI and blocks merges on HIGH and CRITICAL findings
+Security defaults throughout: security group rules reference resource IDs not CIDR ranges wherever possible; all ingress to the application tier flows through the ALB; no SSH ports open; no public IP assignment on Fargate tasks. **Checkov** runs in CI and blocks merges on HIGH and CRITICAL findings.
 
 ## Architecture
 
