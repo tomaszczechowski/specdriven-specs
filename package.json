@@ -4,9 +4,13 @@
   "private": true,
   "description": "Community-contributed project specs for specdriven.sh",
   "scripts": {
-    "validate": "node .github/scripts/validate-specs.js"
+    "validate": "node .github/scripts/validate-specs.js",
+    "audit:spec": "node .github/scripts/audit-spec-review.mjs"
   },
   "dependencies": {
-    "gray-matter": "^4.0.3"
+    "@ai-sdk/anthropic": "^1.0.0",
+    "ai": "^4.3.0",
+    "gray-matter": "^4.0.3",
+    "zod": "^3.24.0"
   }
 }
