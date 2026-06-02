@@ -123,12 +123,11 @@ async function review(slug, specBody) {
       maxRetries: 2,
     });
 
-    return {
-      status: object.status,
-      score: object.score,
-      checked: today,
-      notes: object.notes,
-    };
+    const result = { status: object.status, score: object.score, checked: today };
+
+    if (object.status !== "pass") result.notes = object.notes;
+
+    return result;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
 
