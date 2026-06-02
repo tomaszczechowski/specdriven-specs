@@ -83,7 +83,7 @@ jobs:
             git config user.name "specdriven-bot"
             git config user.email "bot@specdriven.sh"
             git add content/specs
-            git commit -m "chore(audits): add spec review scores"
+            git commit -m "chore(audits): add spec review scores [skip ci]"
             git push origin "HEAD:$HEAD_REF"
           fi
 
