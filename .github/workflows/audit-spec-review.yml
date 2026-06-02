@@ -57,7 +57,7 @@ jobs:
             printf 'Reviewing all specs\n'
           fi
 
-      - name: Run Spec Review auditor
+      - name: Run Audit Spec Review auditor
         id: review
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -72,7 +72,7 @@ jobs:
             git config user.name "specdriven-bot"
             git config user.email "bot@specdriven.sh"
             git add content/specs
-            git commit -m "chore(audits): refresh spec review scores ($(date -u +%Y-%m-%d))"
+            git commit -m "chore(audits): refresh audit spec review scores ($(date -u +%Y-%m-%d))"
             git push
           else
             echo "No review changes to commit."
@@ -105,8 +105,8 @@ jobs:
 
             const failures = Number(process.env.FAILURES || 0);
             const header = failures > 0
-              ? `### ❌ Spec Review — ${failures} spec${failures === 1 ? "" : "s"} below quality bar`
-              : `### ✅ Spec Review`;
+              ? `### ❌ Audit Spec Review — ${failures} spec${failures === 1 ? "" : "s"} below quality bar`
+              : `### ✅ Audit  Spec Review`;
 
             const body = rows.length
               ? `${header}\n\n| Spec | Status | Checked | Notes |\n|------|--------|---------|-------|\n${rows.join("\n")}\n\n_Score thresholds: 80+ pass · 60-79 warn · <60 fail. Reviewed against \`SPEC_REQUIREMENTS.md\`._`

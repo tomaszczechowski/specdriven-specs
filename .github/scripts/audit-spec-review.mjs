@@ -28,7 +28,7 @@ const SPECS_DIR = path.join(ROOT, "content", "specs");
 const REQUIREMENTS_PATH = path.join(ROOT, "SPEC_REQUIREMENTS.md");
 
 const API_KEY = process.env.ANTHROPIC_API_KEY;
-const MODEL_ID = process.env.ANTHROPIC_MODEL ?? "claude-haiku-4-5-20251001";
+const MODEL_ID = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5-20251001";
 const FILTER = (process.env.SPECS_FILTER ?? "")
   .split(",")
   .map((s) => s.trim())
