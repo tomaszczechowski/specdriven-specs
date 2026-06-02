@@ -42,8 +42,7 @@
     "spec-review": {
       "status": "pass",
       "score": 87,
-      "checked": "2026-06-02",
-      "notes": "Excellent substance, reasoning, and honesty. Minor gaps: no concrete Terratest example code, no specdriven-metadata.json provided, and \"Getting started\" step 5 (Atlantis deploy) lacks detail on secrets setup. Otherwise p"
+      "checked": "2026-06-02"
     }
   }
 }
