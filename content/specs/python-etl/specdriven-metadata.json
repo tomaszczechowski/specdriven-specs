@@ -1,7 +1,15 @@
 {
   "title": "Python ETL",
   "category": "data",
-  "stack": ["Python", "Airflow 2.9", "dbt Core 1.8", "PostgreSQL 16", "S3", "Redis", "Celery"],
+  "stack": [
+    "Python",
+    "Airflow 2.9",
+    "dbt Core 1.8",
+    "PostgreSQL 16",
+    "S3",
+    "Redis",
+    "Celery"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -25,8 +33,23 @@
       }
     ]
   },
-  "tags": ["etl", "airflow", "dbt", "s3", "pipeline", "python", "postgres"],
+  "tags": [
+    "etl",
+    "airflow",
+    "dbt",
+    "s3",
+    "pipeline",
+    "python",
+    "postgres"
+  ],
   "author": "community",
   "updated": "2026-05-21",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

@@ -2,7 +2,14 @@
   "title": "T3 Stack",
   "description": "Type-safe full-stack starter - Next.js, tRPC, Prisma, NextAuth, Tailwind. Curated, hosted upstream.",
   "category": "webapp",
-  "stack": ["Next.js", "TypeScript", "tRPC", "Prisma", "NextAuth", "Tailwind"],
+  "stack": [
+    "Next.js",
+    "TypeScript",
+    "tRPC",
+    "Prisma",
+    "NextAuth",
+    "Tailwind"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -20,7 +27,13 @@
       }
     ]
   },
-  "tags": ["t3", "trpc", "nextjs", "type-safety", "fullstack"],
+  "tags": [
+    "t3",
+    "trpc",
+    "nextjs",
+    "type-safety",
+    "fullstack"
+  ],
   "author": "t3-oss",
   "updated": "2026-05-14",
   "complexity": "production",
@@ -28,5 +41,13 @@
     "url": "https://github.com/t3-oss/create-t3-app/tree/main/cli/template/base",
     "homepage": "https://create.t3.gg/",
     "license": "MIT"
+  },
+  "audits": {
+    "spec-review": {
+      "status": "warn",
+      "score": 68,
+      "checked": "2026-06-02",
+      "notes": "Spec is honest and well-reasoned but lacks substance: no concrete versions pinned, no file paths, no bootstrap script, no examples. Reads as curated reference rather than opinionated blueprint. Add version matrix and loc"
+    }
   }
 }

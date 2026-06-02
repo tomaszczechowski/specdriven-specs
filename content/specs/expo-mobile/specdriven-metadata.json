@@ -1,7 +1,15 @@
 {
   "title": "Expo Mobile",
   "category": "mobile",
-  "stack": ["Expo SDK 52", "React Native", "TypeScript", "Expo Router", "Zustand", "TanStack Query", "NativeWind"],
+  "stack": [
+    "Expo SDK 52",
+    "React Native",
+    "TypeScript",
+    "Expo Router",
+    "Zustand",
+    "TanStack Query",
+    "NativeWind"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -19,8 +27,23 @@
       }
     ]
   },
-  "tags": ["expo", "react-native", "mobile", "offline", "typescript", "ios", "android"],
+  "tags": [
+    "expo",
+    "react-native",
+    "mobile",
+    "offline",
+    "typescript",
+    "ios",
+    "android"
+  ],
   "author": "community",
   "updated": "2026-05-21",
-  "complexity": "starter"
+  "complexity": "starter",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

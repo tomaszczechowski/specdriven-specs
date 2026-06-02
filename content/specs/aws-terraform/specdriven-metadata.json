@@ -1,7 +1,14 @@
 {
   "title": "AWS Terraform",
   "category": "infra",
-  "stack": ["Terraform", "AWS", "ECS Fargate", "RDS PostgreSQL", "GitHub Actions", "Atlantis"],
+  "stack": [
+    "Terraform",
+    "AWS",
+    "ECS Fargate",
+    "RDS PostgreSQL",
+    "GitHub Actions",
+    "Atlantis"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -19,8 +26,23 @@
       }
     ]
   },
-  "tags": ["aws", "terraform", "ecs", "fargate", "rds", "atlantis", "iac"],
+  "tags": [
+    "aws",
+    "terraform",
+    "ecs",
+    "fargate",
+    "rds",
+    "atlantis",
+    "iac"
+  ],
   "author": "anthropic",
   "updated": "2026-05-21",
-  "complexity": "enterprise"
+  "complexity": "enterprise",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

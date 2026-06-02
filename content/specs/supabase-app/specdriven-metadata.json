@@ -1,7 +1,14 @@
 {
   "title": "Supabase + Next.js",
   "category": "webapp",
-  "stack": ["Next.js 15", "TypeScript", "Supabase", "PostgreSQL", "Tailwind", "Zod"],
+  "stack": [
+    "Next.js 15",
+    "TypeScript",
+    "Supabase",
+    "PostgreSQL",
+    "Tailwind",
+    "Zod"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -31,8 +38,22 @@
       }
     ]
   },
-  "tags": ["supabase", "nextjs", "postgres", "rls", "auth", "realtime"],
+  "tags": [
+    "supabase",
+    "nextjs",
+    "postgres",
+    "rls",
+    "auth",
+    "realtime"
+  ],
   "author": "specdriven",
   "updated": "2026-05-20",
-  "complexity": "starter"
+  "complexity": "starter",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }
