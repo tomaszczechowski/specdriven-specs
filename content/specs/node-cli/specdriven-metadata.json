@@ -1,7 +1,14 @@
 {
   "title": "Node CLI",
   "category": "cli",
-  "stack": ["Node.js", "TypeScript 5.4", "Commander.js", "Ink", "Vitest", "Changesets"],
+  "stack": [
+    "Node.js",
+    "TypeScript 5.4",
+    "Commander.js",
+    "Ink",
+    "Vitest",
+    "Changesets"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -25,8 +32,22 @@
       }
     ]
   },
-  "tags": ["cli", "typescript", "commander", "ink", "node", "plugin"],
+  "tags": [
+    "cli",
+    "typescript",
+    "commander",
+    "ink",
+    "node",
+    "plugin"
+  ],
   "author": "anthropic",
   "updated": "2026-05-21",
-  "complexity": "starter"
+  "complexity": "starter",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

@@ -1,7 +1,15 @@
 {
   "title": "Go HTTP Service",
   "category": "api",
-  "stack": ["Go", "chi", "sqlc", "pgx", "PostgreSQL", "OpenTelemetry", "golang-migrate"],
+  "stack": [
+    "Go",
+    "chi",
+    "sqlc",
+    "pgx",
+    "PostgreSQL",
+    "OpenTelemetry",
+    "golang-migrate"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -31,8 +39,22 @@
       }
     ]
   },
-  "tags": ["go", "golang", "rest", "sqlc", "chi", "postgres"],
+  "tags": [
+    "go",
+    "golang",
+    "rest",
+    "sqlc",
+    "chi",
+    "postgres"
+  ],
   "author": "specdriven",
   "updated": "2026-05-20",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

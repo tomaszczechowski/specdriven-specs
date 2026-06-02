@@ -1,7 +1,16 @@
 {
   "title": "NestJS API",
   "category": "api",
-  "stack": ["NestJS 10", "TypeScript", "Prisma", "PostgreSQL", "Redis", "BullMQ", "Apollo GraphQL", "Passport"],
+  "stack": [
+    "NestJS 10",
+    "TypeScript",
+    "Prisma",
+    "PostgreSQL",
+    "Redis",
+    "BullMQ",
+    "Apollo GraphQL",
+    "Passport"
+  ],
   "skills": {
     "internal": [],
     "external": [
@@ -31,8 +40,22 @@
       }
     ]
   },
-  "tags": ["nestjs", "graphql", "rest", "prisma", "bullmq", "typescript"],
+  "tags": [
+    "nestjs",
+    "graphql",
+    "rest",
+    "prisma",
+    "bullmq",
+    "typescript"
+  ],
   "author": "specdriven",
   "updated": "2026-05-20",
-  "complexity": "production"
+  "complexity": "production",
+  "audits": {
+    "spec-review": {
+      "status": "pass",
+      "score": 87,
+      "checked": "2026-06-02"
+    }
+  }
 }

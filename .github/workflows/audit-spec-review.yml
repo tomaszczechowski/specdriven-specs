@@ -74,18 +74,6 @@ jobs:
           SPECS_FILTER: ${{ steps.filter.outputs.filter }}
         run: node .github/scripts/audit-spec-review.mjs
 
-      - name: Commit audit results to PR branch (same-repo PRs only)
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-        env:
-          HEAD_REF: ${{ github.head_ref }}
-        run: |
-          if [ -n "$(git status --porcelain content/specs)" ]; then
-            git config user.name "specdriven-bot"
-            git config user.email "bot@specdriven.sh"
-            git add content/specs
-            git commit -m "chore(audits): add spec review scores [skip ci]"
-            git push origin "HEAD:$HEAD_REF"
-          fi
 
       - name: Commit refreshed reviews (push / cron / manual only)
         if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
