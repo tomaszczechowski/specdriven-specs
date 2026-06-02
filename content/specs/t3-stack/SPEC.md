@@ -7,7 +7,7 @@ description: Type-safe full-stack starter - Next.js, tRPC, Prisma, NextAuth, Tai
 
 The T3 stack is the reference choice when you want **end-to-end type safety without rolling your own** - types flow from the database schema (Prisma) through the API layer (tRPC) into React components, with zero hand-written API contracts. For projects where the team is comfortable in Next.js and the surface area is "internal tooling + customer dashboards," this scaffold gets you to a working app faster than almost anything else.
 
-It is maintained by the T3 community (Theo Brown and contributors), with a sizable ecosystem of tutorials, video walkthroughs, and ports. **The base template lives upstream at `t3-oss/create-t3-app`** - we don't mirror it. Installing this spec via `specdriven` pulls files directly from the source repository.
+It is maintained by the T3 community (Theo Brown and contributors), with a sizable ecosystem of tutorials, video walkthroughs, and ports. **The base template lives upstream at `t3-oss/create-t3-app`** - we don't mirror it. Installing this spec via `specdriven` pulls files directly from the source repository
 
 ## When to pick T3 over `nextjs-saas`
 

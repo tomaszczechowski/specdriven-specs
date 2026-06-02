@@ -9,7 +9,7 @@ A leaner counterpoint to a roll-your-own SaaS stack: ship a real product on **Su
 
 The Next.js side is App Router with React Server Components throughout. Server components use the Supabase server client (cookie-based session, refreshed by middleware). Client components use the browser client. **Tailwind v4** + **shadcn/ui** for UI. Forms via **react-hook-form** + **Zod**. Migrations are SQL files in `supabase/migrations/` and the local Supabase stack runs in Docker for offline development.
 
-This is the project blueprint for "I want to ship in a weekend without owning Postgres, auth, file storage, and websocket infrastructure separately." It's the opposite philosophy from `nextjs-saas`: don't run the backend, rent it.
+This is the project blueprint for "I want to ship in a weekend without owning Postgres, auth, file storage, and websocket infrastructure separately." It's the opposite philosophy from `nextjs-saas`: don't run the backend, rent it
 
 ## Architecture
 
