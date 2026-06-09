@@ -9,7 +9,7 @@ A production ETL framework organised around three distinct stages: **extract**, 
 
 Pre-built extractors for common sources: REST APIs (with pagination, rate limiting, and retry), SFTP, and relational databases (via SQLAlchemy with configurable batch size). A `BaseExtractor` abstract class makes adding new sources a matter of implementing a single `extract(window: DateWindow) -> Iterator[dict]` method. All extractors are **idempotent**: re-running a pipeline window upserts rather than appending — no duplicates, safe to re-trigger on failure.
 
-A separate **data quality DAG** runs dbt tests every six hours and pages via PagerDuty on unexpected null rates, row-count anomalies, or schema drift
+A separate **data quality DAG** runs dbt tests every six hours and pages via PagerDuty on unexpected null rates, row-count anomalies, or schema drift.
 
 ## Architecture
 
