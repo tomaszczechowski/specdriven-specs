@@ -16,10 +16,6 @@ on:
   pull_request:
     paths:
       - "content/specs/**"
-  push:
-    branches: [main]
-    paths:
-      - "content/specs/**"
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch: {}
@@ -35,6 +31,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref }}
 
       - uses: actions/setup-node@v4
         with:
@@ -50,17 +47,11 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          BEFORE_SHA: ${{ github.event.before }}
-          AFTER_SHA: ${{ github.event.after }}
         run: |
           if [ "$EVENT_NAME" = "pull_request" ]; then
             changed=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- 'content/specs/*' | awk -F/ '{print $3}' | sort -u | paste -sd, -)
             printf 'filter=%s\n' "$changed" >> "$GITHUB_OUTPUT"
             printf 'Reviewing PR-touched specs: %s\n' "$changed"
-          elif [ "$EVENT_NAME" = "push" ]; then
-            changed=$(git diff --name-only "$BEFORE_SHA" "$AFTER_SHA" -- 'content/specs/*' | awk -F/ '{print $3}' | sort -u | paste -sd, -)
-            printf 'filter=%s\n' "$changed" >> "$GITHUB_OUTPUT"
-            printf 'Reviewing merged specs: %s\n' "$changed"
           else
             printf 'filter=\n' >> "$GITHUB_OUTPUT"
             printf 'Reviewing all specs\n'
@@ -75,8 +66,23 @@ jobs:
         run: node .github/scripts/audit-spec-review.mjs
 
 
-      - name: Commit audit results to main
-        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: Commit audit results to PR branch
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [ -n "$(git status --porcelain content/specs)" ]; then
+            git config user.name "specdriven-bot"
+            git config user.email "bot@specdriven.sh"
+            git add content/specs
+            git commit -m "chore(audits): add spec review scores [skip ci]"
+            git push origin "HEAD:$HEAD_REF"
+          else
+            echo "No audit changes to commit."
+          fi
+
+      - name: Commit audit results to main (cron / manual only)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           if [ -n "$(git status --porcelain content/specs)" ]; then
             git config user.name "specdriven-bot"
