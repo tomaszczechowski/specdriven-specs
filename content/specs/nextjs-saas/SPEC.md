@@ -9,7 +9,7 @@ A complete, opinionated SaaS foundation that ships production-wired from day one
 
 The frontend is Next.js 15 App Router with React Server Components throughout. Tailwind v4 for styling. **Drizzle ORM** with migrations checked into git. Vercel for hosting, Vercel Cron for scheduled jobs. Sentry for error tracking and **Vercel Analytics** for product analytics.
 
-This is the project blueprint for "I need to ship a SaaS in two weeks." It is not a hello-world template, and it is not aiming for maximum framework neutrality - it picks the stack that gets you to revenue fastest
+This is the project blueprint for "I need to ship a SaaS in two weeks." It is not a hello-world template, and it is not aiming for maximum framework neutrality - it picks the stack that gets you to revenue fastest.
 
 ## Architecture
 

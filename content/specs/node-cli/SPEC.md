@@ -9,7 +9,7 @@ A **TypeScript 5.4** CLI scaffold built on **Commander.js v12** for argument par
 
 Configuration resolves from three sources in priority order: `~/.config/<tool>/config.json` (user-level), environment variables prefixed with the tool's uppercase name, and explicit flags. A built-in `config` command lets users view and set configuration interactively. A **Zod** schema validates the resolved config at startup and produces a clear error message with the config file path when something is wrong.
 
-**Vitest** covers command parsing, configuration resolution, and interactive prompt flows. **Changesets** manages versioning and `CHANGELOG.md`. Releases are automated via a GitHub Actions workflow that publishes to npm on version-tag push
+**Vitest** covers command parsing, configuration resolution, and interactive prompt flows. **Changesets** manages versioning and `CHANGELOG.md`. Releases are automated via a GitHub Actions workflow that publishes to npm on version-tag push.
 
 ## Architecture
 
