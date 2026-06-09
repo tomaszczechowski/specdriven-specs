@@ -157,9 +157,7 @@ async function review(slug, specBody) {
       maxRetries: 2,
     });
 
-    const result = { status: object.status, score: object.score, checked: today };
-
-    if (object.status !== "pass") result.notes = object.notes;
+    const result = { status: object.status, score: object.score, checked: today, notes: object.notes };
 
     return result;
   } catch (err) {

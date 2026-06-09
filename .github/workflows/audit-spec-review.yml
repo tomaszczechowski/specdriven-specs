@@ -16,10 +16,6 @@ on:
   pull_request:
     paths:
       - "content/specs/**"
-  push:
-    branches: [main]
-    paths:
-      - "content/specs/**"
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch: {}
@@ -29,7 +25,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  audit:
+  Audit-Spec-Content:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,17 +46,11 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          BEFORE_SHA: ${{ github.event.before }}
-          AFTER_SHA: ${{ github.event.after }}
         run: |
           if [ "$EVENT_NAME" = "pull_request" ]; then
             changed=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- 'content/specs/*' | awk -F/ '{print $3}' | sort -u | paste -sd, -)
             printf 'filter=%s\n' "$changed" >> "$GITHUB_OUTPUT"
             printf 'Reviewing PR-touched specs: %s\n' "$changed"
-          elif [ "$EVENT_NAME" = "push" ]; then
-            changed=$(git diff --name-only "$BEFORE_SHA" "$AFTER_SHA" -- 'content/specs/*' | awk -F/ '{print $3}' | sort -u | paste -sd, -)
-            printf 'filter=%s\n' "$changed" >> "$GITHUB_OUTPUT"
-            printf 'Reviewing pushed specs: %s\n' "$changed"
           else
             printf 'filter=\n' >> "$GITHUB_OUTPUT"
             printf 'Reviewing all specs\n'
@@ -75,8 +65,8 @@ jobs:
         run: node .github/scripts/audit-spec-review.mjs
 
 
-      - name: Commit refreshed reviews (push / cron / manual only)
-        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: Commit refreshed reviews (cron / manual only)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           if [ -n "$(git status --porcelain content/specs)" ]; then
             git config user.name "specdriven-bot"
@@ -109,7 +99,7 @@ jobs:
               if (!r) continue;
               const score = typeof r.score === "number" ? ` · ${r.score}` : "";
               const badge = r.status === "pass" ? "✅" : r.status === "warn" ? "⚠️" : r.status === "fail" ? "❌" : "❓";
-              const note = r.status !== "pass" && r.notes ? ` — ${r.notes}` : "";
+              const note = r.notes ? ` — ${r.notes}` : "";
               rows.push(`| \`${slug}\` | ${badge} **${r.status}**${score} | ${r.checked} |${note} |`);
             }
 
