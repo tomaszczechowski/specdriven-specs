@@ -55,8 +55,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 92,
+      "checked": "2026-06-09",
+      "notes": "Exceptional substance and coherence. Real versions, paths, and config patterns throughout. Explicit trade-off reasoning for every major choice. Specific \"when not to use\" section tied to architecture. Only minor gaps: se"
     }
   }
 }

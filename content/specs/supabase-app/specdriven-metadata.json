@@ -52,8 +52,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 86,
+      "checked": "2026-06-09",
+      "notes": "Strongest quality: comprehensive architectural rationale with genuine trade-offs and a candid \"When NOT to use\" section that names real constraints, not strawmen. Minor gaps: missing specific versions for form/UI librari"
     }
   }
 }

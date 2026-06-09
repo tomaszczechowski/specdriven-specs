@@ -54,8 +54,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 92,
+      "checked": "2026-06-09",
+      "notes": "Exceptional substance and reasoning. Concrete versions, real paths, and code snippets throughout. Opinionated choices are well-justified with trade-offs. \"When NOT to use\" section is specific and architectural, not straw"
     }
   }
 }

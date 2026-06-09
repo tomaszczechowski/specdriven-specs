@@ -9,7 +9,7 @@ A batteries-included Python backend built on **Django 5** and **Django REST Fram
 
 Tests run on **pytest-django** with **factory-boy** fixtures and **pytest-xdist** for parallel runs. **ruff** for linting and formatting, **mypy** with `django-stubs` and `djangorestframework-stubs` for the type checks Django itself doesn't enforce. Production is **gunicorn** behind **nginx** (or behind a managed load balancer), **whitenoise** for static assets, **structlog** for structured JSON logging with request IDs, **Sentry** for error tracking, **django-prometheus** for `/metrics`.
 
-This is the project blueprint for "I want a typed, well-tested Python API with an admin out of the box and a path to grow into a multi-team codebase."
+This is the project blueprint for "I want a typed, well-tested Python API with an admin out of the box and a path to grow into a multi-team codebase.".
 
 ## Architecture
 

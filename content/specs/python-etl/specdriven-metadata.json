@@ -48,8 +48,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 89,
+      "checked": "2026-06-09",
+      "notes": "Exceptional substance and reasoning; every major choice justified with trade-offs. Minor: docker-compose.yml referenced but not shown; unclear whether Airflow services run in container or locally in step 5."
     }
   }
 }
