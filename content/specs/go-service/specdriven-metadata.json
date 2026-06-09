@@ -53,8 +53,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 90,
+      "checked": "2026-06-09",
+      "notes": "Strongest quality: every architectural choice has a clear rationale with acknowledged trade-offs. Minor gaps: no pinned dependency versions, env.example.txt not shown, Makefile targets referenced but undefined."
     }
   }
 }

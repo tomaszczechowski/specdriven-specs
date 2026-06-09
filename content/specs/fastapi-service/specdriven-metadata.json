@@ -49,8 +49,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 91,
+      "checked": "2026-06-09",
+      "notes": "Strongest quality: every architectural choice is justified with explicit trade-offs (FastAPI vs Flask/DRF, SQLAlchemy 2.0 async vs alternatives, Celery vs ARQ). Concrete versions, real paths, runnable setup. Minor: secon"
     }
   }
 }

@@ -41,8 +41,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 88,
+      "checked": "2026-06-09",
+      "notes": "Strongest quality: exceptionally clear opinionated-choices section with genuine trade-offs and migration paths. Actionable gap: missing Terraform version constraints, ECR image build pipeline integration, and Secrets Man"
     }
   }
 }

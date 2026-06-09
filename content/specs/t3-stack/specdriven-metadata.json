@@ -45,9 +45,9 @@
   "audits": {
     "spec-review": {
       "status": "warn",
-      "score": 68,
-      "checked": "2026-06-02",
-      "notes": "Spec is honest and well-reasoned but lacks substance: no concrete versions pinned, no file paths, no bootstrap script, no examples. Reads as curated reference rather than opinionated blueprint. Add version matrix and loc"
+      "score": 71,
+      "checked": "2026-06-09",
+      "notes": "Strong reasoning and honesty (tRPC lock-in, SQLite→Postgres migration named explicitly), but weak substance: no concrete versions beyond major numbers, no config snippets, no example files. Add `.env.example`, Prisma sch"
     }
   }
 }

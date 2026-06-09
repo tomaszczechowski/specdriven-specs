@@ -42,8 +42,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 88,
+      "checked": "2026-06-09",
+      "notes": "Strongest quality: comprehensive, honest \"When NOT to use\" section tied directly to architectural choices. Minor gaps: no package.json or eas.json content shown; offline queue rationale could be deeper."
     }
   }
 }

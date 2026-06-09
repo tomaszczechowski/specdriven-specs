@@ -46,8 +46,9 @@
   "audits": {
     "spec-review": {
       "status": "pass",
-      "score": 87,
-      "checked": "2026-06-02"
+      "score": 88,
+      "checked": "2026-06-09",
+      "notes": "Strongest quality: comprehensive rationale for every major choice (Commander, Ink, Vitest, Changesets, pnpm, XDG, --json) with clear trade-offs. Actionable gap: add real examples of plugin package structure and config.js"
     }
   }
 }
