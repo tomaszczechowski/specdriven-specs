@@ -9,7 +9,7 @@ A typed **Expo SDK 52** scaffold targeting iOS and Android from a single codebas
 
 **Zustand** manages global client state with immer middleware for immutable updates. **TanStack Query v5** handles server state: data fetching, background revalidation, and optimistic updates. An offline mutation queue replays in-order when connectivity is restored, using `@react-native-netinfo` for network observation and a combination of `expo-secure-store` (for tokens) and `@react-native-async-storage` (for query cache persistence).
 
-UI is built with **NativeWind v4** (Tailwind CSS syntax on React Native) over a small set of base primitives in `components/ui/`. **React Native Reanimated v3** and **Gesture Handler** are installed and pre-configured; animations use the `useSharedValue` + `useAnimatedStyle` pattern and stay within the 60fps budget by default
+UI is built with **NativeWind v4** (Tailwind CSS syntax on React Native) over a small set of base primitives in `components/ui/`. **React Native Reanimated v3** and **Gesture Handler** are installed and pre-configured; animations use the `useSharedValue` + `useAnimatedStyle` pattern and stay within the 60fps budget by default.
 
 ## Architecture
 

@@ -62,7 +62,7 @@ Business logic never sees `http.ResponseWriter`. Testing handlers requires almos
 
 **Context propagation everywhere.** Every function that does I/O takes `ctx context.Context` as its first argument. Request context flows from the router through the service into the database driver, so cancellation and deadlines work — a client disconnect cancels the in-flight Postgres query, not the other way around. The request ID, trace ID, and authenticated user are pulled out of context, never passed as separate arguments.
 
-**Observability is set up before the server starts.** OTel SDK initialises with OTLP exporters for traces and metrics. The HTTP middleware creates a server span per request, propagates W3C TraceContext headers, and adds `http.status_code`, `http.route` (the chi-matched pattern, not the raw URL), and `request_id` attributes. Database calls are auto-instrumented via the pgx OTel hook. Logs include `trace_id` and `span_id` so a log line links straight to a trace.
+**Observability is set up before the server starts.** OTel SDK initialises with OTLP exporters for traces and metrics. The HTTP middleware creates a server span per request, propagates W3C TraceContext headers, and adds `http.status_code`, `http.route` (the chi-matched pattern, not the raw URL), and `request_id` attributes. Database calls are auto-instrumented via the pgx OTel hook. Logs include `trace_id` and `span_id` so a log line links straight to a trace
 
 ## File structure
 
