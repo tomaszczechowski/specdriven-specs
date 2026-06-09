@@ -1,7 +1,7 @@
 name: Audit Spec Review
 
-# Runs the Spec Review auditor on PRs touching spec content, on pushes to main
-# (immediately after a merge), and on a nightly schedule.
+# Runs the Spec Review auditor on PRs touching spec content (for comment/gate),
+# once more immediately after merge (to commit scores to main), and on a nightly schedule.
 #
 # All github.event values flow through env: vars before reaching run: scripts
 # to avoid actions-injection vectors. See:
@@ -14,6 +14,7 @@ name: Audit Spec Review
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, closed]
     paths:
       - "content/specs/**"
   schedule:
@@ -26,12 +27,22 @@ permissions:
 
 jobs:
   Audit-Spec-Content:
+    # Skip closed-but-not-merged PRs — nothing to audit or commit.
+    if: github.event_name != 'pull_request' || github.event.action != 'closed' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      # For merged PRs check out main (where the commit must land).
+      # For open PRs and cron/manual use the default ref.
       - uses: actions/checkout@v4
+        if: github.event.pull_request.merged != true
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref || github.ref }}
+
+      - uses: actions/checkout@v4
+        if: github.event.pull_request.merged == true
+        with:
+          fetch-depth: 0
+          ref: ${{ github.base_ref }}
 
       - uses: actions/setup-node@v4
         with:
@@ -65,24 +76,8 @@ jobs:
           SPECS_FILTER: ${{ steps.filter.outputs.filter }}
         run: node .github/scripts/audit-spec-review.mjs
 
-
-      - name: Commit audit results to PR branch
-        if: github.event_name == 'pull_request'
-        env:
-          HEAD_REF: ${{ github.head_ref }}
-        run: |
-          if [ -n "$(git status --porcelain content/specs)" ]; then
-            git config user.name "specdriven-bot"
-            git config user.email "bot@specdriven.sh"
-            git add content/specs
-            git commit -m "chore(audits): add spec review scores [skip ci]"
-            git push origin "HEAD:$HEAD_REF"
-          else
-            echo "No audit changes to commit."
-          fi
-
-      - name: Commit audit results to main (cron / manual only)
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: Commit audit results to main
+        if: github.event.pull_request.merged == true || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
           if [ -n "$(git status --porcelain content/specs)" ]; then
             git config user.name "specdriven-bot"
@@ -95,7 +90,7 @@ jobs:
           fi
 
       - name: Comment on PR with review summary
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.event.action != 'closed'
         uses: actions/github-script@v7
         env:
           FAILURES: ${{ steps.review.outputs.failures }}
@@ -135,8 +130,8 @@ jobs:
               body,
             });
 
-      - name: Fail on quality failures (PR only)
-        if: github.event_name == 'pull_request' && steps.review.outputs.failures != '0' && steps.review.outputs.failures != ''
+      - name: Fail on quality failures (open PR only)
+        if: github.event_name == 'pull_request' && github.event.action != 'closed' && steps.review.outputs.failures != '0' && steps.review.outputs.failures != ''
         env:
           FAILURES: ${{ steps.review.outputs.failures }}
         run: |
