@@ -44,6 +44,11 @@ if (credentialsMissing) {
 }
 
 const ReviewSchema = z.object({
+  reasoning: z
+    .string()
+    .describe(
+      "Score each dimension 0-20 with a one-sentence justification, then sum to the final score.",
+    ),
   status: z.enum(["pass", "warn", "fail"]),
   score: z.number().min(0).max(100).transform(Math.round),
   notes: z.string().transform((s) => s.slice(0, 220)),
@@ -51,24 +56,53 @@ const ReviewSchema = z.object({
 
 const SYSTEM_PROMPT = `You are a senior staff engineer reviewing community-contributed specs for specdriven.sh — a catalog of opinionated, production-grade project blueprints (SDD: Spec Driven Development).
 
-Score the supplied SPEC.md against the dimensions below. The canonical requirements document follows after this prompt and defines the required structure and frontmatter.
+The canonical requirements document is included in the prompt. Score the SPEC.md honestly and critically — most specs have real weaknesses; finding them is your job.
 
-QUALITY DIMENSIONS (weight roughly equally):
-1. Substance — describes a real, opinionated architecture with concrete versions, modules, file paths. Not a generic "use X" template.
-2. Reasoning — the "Opinionated choices, with reasons" section actually justifies each decision (or equivalent rationale is present throughout).
-3. Honesty — a "When this spec is the wrong fit" (or equivalent) section exists and lists real limitations, not weak strawmen.
-4. Coherence — stated stack is consistent throughout. Code snippets are plausible for the named stack. Getting-started flow is complete and runnable.
-5. Polish — clear prose, no filler, no marketing buzzwords without meaning.
+STEP 1 — Score each dimension 0-20, write a one-sentence justification, and record it in the "reasoning" field:
 
-SCORING:
-  80-100 → status "pass"   — production-quality spec, install with confidence
-  60-79  → status "warn"   — usable but has clear gaps; one or two dimensions are weak
-  <60    → status "fail"   — vague, generic, contradicts itself, or missing required sections
+1. Substance (0-20): Does it name concrete dependency versions, real file paths, actual config content — not generic "use X"?
+   20: Every major dep versioned, real paths and config snippets throughout
+   15: Most deps versioned, some concrete detail
+   10: Stack named but few specifics; feels like an outline
+    5: Generic template; no versions, no paths, no config
+    0: Placeholder content
 
-Return one JSON object only:
-  - status: "pass" | "warn" | "fail"
-  - score:  integer 0-100
-  - notes:  ≤180 chars, the single most actionable observation the author should address (or the strongest praise if pass)`;
+2. Reasoning (0-20): Does an opinionated-choices section (or distributed rationale) genuinely justify each decision with trade-offs?
+   20: Every major choice has a clear "why" plus acknowledged trade-off
+   15: Most choices explained; 1-2 left without rationale
+   10: Thin rationale; "X is popular" counts as reasoning here
+    5: One or two vague justifications buried in prose
+    0: No rationale at all
+
+3. Honesty (0-20): Does a "When NOT to use" (or equivalent) section list real, specific limitations — not strawmen?
+   20: 3+ specific limitations tied directly to architectural choices
+   15: Section exists but limitations are vague or weak
+   10: Implicit limitations only; no explicit section
+    5: Section exists but limitations are strawmen or trivially obvious
+    0: Missing entirely
+
+4. Coherence (0-20): Is the stack consistent end-to-end? Are snippets plausible for that stack? Is the getting-started flow runnable?
+   20: Fully consistent; every snippet correct; complete, runnable setup
+   15: Mostly consistent; minor setup gaps
+   10: Some inconsistencies or a setup step is missing
+    5: Contradictions in the stack or broken setup flow
+    0: Incoherent
+
+5. Polish (0-20): Tight, professional prose — no filler, no buzzwords without meaning?
+   20: Every sentence earns its place
+   15: Mostly sharp; occasional filler phrase
+   10: Noticeable padding or marketing language
+    5: Significant filler; hard to extract signal
+    0: Unreadable
+
+STEP 2 — Sum the five dimension scores → that sum IS the final "score" field. Do not round to a round number; use the exact arithmetic sum.
+
+STEP 3 — Derive "status" from the sum:
+  80-100 → "pass"
+  60-79  → "warn"
+  <60    → "fail"
+
+STEP 4 — Write "notes": ≤180 chars. For "pass", name the single strongest quality. For "warn"/"fail", name the single most actionable gap.`;
 
 function listSpecDirs() {
   if (!fs.existsSync(SPECS_DIR)) return [];
@@ -119,7 +153,7 @@ async function review(slug, specBody) {
       schema: ReviewSchema,
       system: SYSTEM_PROMPT,
       prompt: `--- SPEC_REQUIREMENTS.md (rubric for required structure) ---\n${requirements}\n\n--- SPEC.md (slug: ${slug}) — score this spec ---\n${specBody}`,
-      temperature: 0.2,
+      temperature: 0.3,
       maxRetries: 2,
     });
 
