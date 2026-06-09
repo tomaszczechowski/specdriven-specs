@@ -150,7 +150,7 @@ Flower (task monitoring UI) is available at `http://localhost:5555` when started
 
 **Unit tests** cover service methods with repositories mocked via `unittest.mock.AsyncMock`. These run with no external dependencies and are tagged `@pytest.mark.unit` for fast local feedback.
 
-**Contract tests** verify that the OpenAPI schema has not changed in backwards-incompatible ways using `schemathesis` for property-based API testing against the running development server.
+**Contract tests** verify that the OpenAPI schema has not changed in backwards-incompatible ways using `schemathesis` for property-based API testing against the running development server
 
 ## Skills paired with this spec
 
